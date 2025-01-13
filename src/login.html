@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Contraloria</title>
+    <link rel="stylesheet" href="css/login.css">
+    
+</head>
+<body>
+    <main class="login-container">
+        <header class="login-header">
+            <div class="login-company">
+                <img src="assets/logo-contraloria.png" alt="Logo de la Contraloria" class="login-company-logo">
+                <h2>Contraloria Municipal de Guanipa</h2>
+            </div>
+
+            <div class="login-welcome">
+                <h2>BIENVENIDO DE NUEVO</h2>
+                <p>Por favor inicia sesión para continuar</p>
+            </div>
+        </header>
+        
+        <div class="login-body">
+            <div class="login-form">
+                <h1 class="login-title">Iniciar Sesión</h1>                
+                <form action="/login" method="POST">
+                    <select name="" id="" class="login-input">
+                        <option value="admin">Contaduria</option>
+                        <option value="user">Usuario</option>
+                    </select>
+                    <input type="text" class="login-input" name="username" placeholder="Usuario" required>
+                    <input type="password" class="login-input" name="password" placeholder="Contraseña" required><br>
+                    <div class="login-show-password">
+                        <input type="checkbox" onclick="showPassword()">
+                        <span>Mostrar contraseña</span>
+                    </div>
+                    <button type="submit" class="login-button">Ingresar</button>
+                </form>
+                <div class="login-links">
+                    <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+                    <a href="/register">¿No tienes cuenta? Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
