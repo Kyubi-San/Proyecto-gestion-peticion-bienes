@@ -1,3 +1,74 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+  header('Location: ../index.php');
+}
+
+require '../server/db.php';
+
+if ($_POST) {
+
+    # Esquema
+    $dependencia = htmlspecialchars($_POST['dependencia']);
+    $username = htmlspecialchars($_POST['usuario']);
+    $contrasena = $_POST['contrasena'];
+    $confirmPassword = $_POST["confirmacioncontrasena"];
+    $email = $_POST['email'];
+    $cedula = $_POST['cedula'];
+    $nombre = htmlspecialchars($_POST['nombre']);
+    $apellido = htmlspecialchars($_POST['apellido']);
+    $telefono = htmlspecialchars($_POST['telefono']);
+  
+  if (!empty($dependencia) && !empty($email) && !empty($contrasena) &&  !empty($username) && isset($confirmPassword) && $contrasena == $confirmPassword) {
+
+    // Variables si el email ya se a ingresado antes
+
+    $verif_email = $conn->prepare("SELECT correo FROM usuario WHERE correo = :email");
+    $verif_email->bindParam(':email', $email);
+    $verif_email->execute();
+    $results = $verif_email->fetch(PDO::FETCH_ASSOC);
+
+    if ($results) {
+     
+      header('location: signup.php');
+      echo "Este correo ya esta registrado";
+
+    } else {
+
+    // Variables para insertar los datos en la db si todo sale bien
+
+      $stmt = $conn->prepare("INSERT INTO usuario (nombre_dependencia, username, correo, contrasena, nombre, apellido, telefono, cedula) VALUES (:dependencia, :user, :email, :password, :nombre, :apellido, :telefono, :cedula)");
+
+      $stmt->bindParam(':dependencia', $dependencia);
+      $stmt->bindParam(':user', $username);
+      $stmt->bindParam(':email', $email);
+      $stmt->bindParam(':nombre', $nombre);
+      $stmt->bindParam(':apellido', $apellido);
+      $stmt->bindParam(':telefono', $telefono);
+      $stmt->bindParam(':cedula', $cedula);
+      $password = password_hash($contrasena, PASSWORD_BCRYPT);
+      $stmt->bindParam(':password', $password);
+
+      $_SESSION['username'] = $username;
+      $_SESSION['email'] = $email; 
+      $stmt->execute();
+
+        $sessionCredentials = $conn->prepare("SELECT n_dependencia, username, correo FROM usuario WHERE correo = :email");
+        $sessionCredentials->bindParam(':email', $_SESSION['email']);
+        $sessionCredentials->execute();
+        $sessionCredentials = $sessionCredentials->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['user_id'] = $sessionCredentials['n_dependencia'];
+        header('location: index.php');
+      }
+      
+    } else {
+      $message = "Fallo en la validacion de sus datos revisa que no falte ningun campo por llenar";
+    }
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +104,7 @@
                     <span class="login-input-error"></span>
                     <input type="password" class="login-input" id="password" name="contrasena" placeholder="Contraseña">
                     <span class="login-input-error"></span>
-                    <input type="password" class="login-input" id="confirm-password" name="confirmacion de contraseña" placeholder="Confirmar contraseña">
+                    <input type="password" class="login-input" id="confirm-password" name="confirmacioncontrasena" placeholder="Confirmar contraseña">
                     <span class="login-input-error" id="confirm-password-error"></span>
                     <input type="email" class="login-input" name="email" placeholder="Correo">
                     <span class="login-input-error"></span>
@@ -48,7 +119,7 @@
                     <button type="submit" class="login-button" id="login-button"><span>Continuar</span></button>
                 </form>
                 <nav class="login-links">
-                    <a href="./login.html">¿Ya tienes una cuenta? Inicia sesion</a>
+                    <a href="./login.php">¿Ya tienes una cuenta? Inicia sesion</a>
                 </nav>
             </div>
         </div>
