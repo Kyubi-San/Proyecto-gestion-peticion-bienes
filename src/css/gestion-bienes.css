@@ -5,43 +5,61 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    height: 100vh;
+    padding: 0;
     display: flex;
     justify-content: center;
+    background: white;
     align-items: center;
-    background: var(--secondary-color);
-    color: black;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
 
 .container {
-    width: 80%;
-    height: 100%;
-    background: var(--tertiary-color);
-    padding: 0 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100vh;
+    background-color: var(--tertiary-color);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }
 
-h1 {
+.main {
+    grid-column: span 3 / span 3;
+    grid-row: span 5 / span 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main h1 {
     text-align: center;
-    color: black;
+    color: #2d3436;
 }
 
 .form {
-    width: 100%;
-    padding: 10px;
     box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 90%;
+    border-radius: 5px;
+    background: #ecf0f1;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 .form-group {
     width: 100%;
-    justify-content: space-between;
     display: flex;
     margin: 10px;
     gap: 20px;
+    justify-content: center;
+}
+
+.form-group div {
+    flex-grow: 1;
 }
 
 input, select {
@@ -55,14 +73,27 @@ input, select {
     flex-grow: 1;
 }
 
+input:disabled, select:disabled {
+    background: #dfe6e9;
+    color: #636e72;
+}
+
 .form-button {
-    background: #6c5ce7;
+    background: #3498db;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
-    width: 150px;
-    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s background;
+}
+
+.form-button:hover {
+    background: #2980b9;
 }
 
 table {

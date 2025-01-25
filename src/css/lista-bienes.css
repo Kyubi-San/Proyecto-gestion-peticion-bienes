@@ -1,0 +1,75 @@
+:root {
+    --primary-color: #2d3436;
+    --secondary-color: #b2bec3;
+    --tertiary-color: #F9F7F7;
+    --menu-color: #f5f6fa;
+    --menu-color-secondary: #2d3436;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: white;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--tertiary-color);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.menu__item {
+    text-decoration: none;
+    color: var(--menu-color-secondary);
+    display: flex;
+    cursor: pointer;
+    display: flex;
+    padding: .8em;
+    justify-content: left;
+    width: 90%;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.main {
+    grid-column: span 3 / span 3;
+    grid-row: span 5 / span 5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #0984e3; /* Color de fondo verde para el encabezado */
+    color: white; /* Texto blanco en el encabezado */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo gris claro para filas pares */
+}
+
+tr:hover {
+    background-color: #74b9ff; /* Color de fondo verde suave al pasar el mouse */
+}

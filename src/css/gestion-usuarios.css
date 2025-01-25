@@ -1,0 +1,127 @@
+:root {
+    --primary-color: #2d3436;
+    --secondary-color: #b2bec3;
+    --tertiary-color: #F9F7F7;
+    --menu-color: #f5f6fa;
+    --menu-color-secondary: #2d3436;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background: white;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: var(--tertiary-color);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.main {
+    grid-column: span 3 / span 3;
+    grid-row: span 5 / span 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.card {
+    width: 45%;
+    background: white;
+    margin: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all .5s;
+    cursor: pointer;
+    height: 250px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.card__body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card__content {
+    width: 100%;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.avatar__container {
+    height: 100%;
+    width: 30%;
+    background: #74b9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card__avatar {
+    color: white;
+    font-size: 2em;
+}
+
+.card__actions {
+    display: flex;
+    margin: 1em;
+    flex-grow: 1;
+    align-items: end;
+    justify-content: center;
+    gap: 1em;
+}
+
+.actions__button {
+    background-color: #3498db;
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    text-decoration: none;
+}
+
+.actions__button:hover {
+    background: #2980b9;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra al pasar el cursor */
+}
+
+.actions__button--delete {
+    background-color: #e74c3c; /* Color de fondo */
+}
+
+.actions__button--delete:hover {
+    background-color: #c0392b; /* Color de fondo al pasar el cursor */
+}
+
+.actions__button:active {
+    background-color: #1c6ea4; /* Color de fondo al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra al hacer clic */
+}

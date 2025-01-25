@@ -21,19 +21,18 @@ require '../server/db.php';
   <div class="container">
     <?php include 'assets/include/menu.php'?>
     <main class="main">
-      <h2>Lista de todos los Bienes</h2>
+      <h2>Lista de todas las solicitudes</h2>
         <input type="text" id="filterId" placeholder="Ingrese ID a filtrar" />
         <button class="button" onclick="filterById()">Filtrar</button>
         <table id="goodsTable">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Responsable</th>
+              <th>Solicitante</th>
+              <th>Fecha Solicitud</th>
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Tipo de Bien</th>
-              <th>Fecha Solicitud</th>
-              <th>Fecha Aprobación</th>
               <th>Comentarios</th>
               <th>Acciones</th>
             </tr>
@@ -41,20 +40,20 @@ require '../server/db.php';
           <tbody>
             <!-- Aquí se llenarán los bienes -->
             <?php
-            foreach ($conn->query('SELECT * from bienes') as $row):
+            foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE aprobado = 0') as $row):
             ?>
             <tr>
-              <td><?php echo htmlspecialchars($row['id']); ?></td>
-              <td><?php echo htmlspecialchars($row['responsible']); ?></td>
-              <td><?php echo htmlspecialchars($row['name']); ?></td>
-              <td><?php echo htmlspecialchars($row['description']); ?></td>
-              <td><?php echo htmlspecialchars($row['type']); ?></td>
-              <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
-              <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
-              <td><?php echo htmlspecialchars($row['comments']); ?></td>
+              <td><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
+              <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
+              <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
+              <td><?php echo htmlspecialchars($row['bien']); ?></td>
+              <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+              <td><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
+              <td><?php echo htmlspecialchars($row['comentario']); ?></td>
               <td>
-                <a href="edit.php?id=<?php echo $row['id']; ?>">Editar</a>
-                <a href="delete.php?id=<?php echo $row['id']; ?>">Eliminar</a>
+                <a href="gestion-solicitudes.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--check" title="Aprobar"><i class="fa-solid fa-check"></i></a>
+                                            /
+                <a href="" class="table__icon--decline" title="Rechazar"><i class="fa-solid fa-xmark"></i></a>
               </td>
             </tr>
             <?php
