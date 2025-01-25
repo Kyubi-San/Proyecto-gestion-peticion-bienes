@@ -1,12 +1,11 @@
 <?php
 
-session_start();
-
-if (isset($_SESSION['user_id'])) {
-  header('Location: ../index.php');
-}
-
+require 'assets/include/session_start.php';
 require '../server/db.php';
+
+if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
+  header('Location: login.php');
+}
 
 if ($_POST) {
 
@@ -82,7 +81,7 @@ if ($_POST) {
     <main class="login-container">
         <header class="login-header">
             <div class="login-company">
-                <img src="assets/logo-contraloria.png" alt="Logo de la Contraloria" class="login-company-logo">
+                <img src="assets/logo-sistema.jpg" alt="Logo de la Contraloria" class="login-company-logo">
                 <h2>Contraloria Municipal de Guanipa</h2>
             </div>
 
@@ -118,9 +117,6 @@ if ($_POST) {
                     <span class="login-input-error2"></span>
                     <button type="submit" class="login-button" id="login-button"><span>Continuar</span></button>
                 </form>
-                <nav class="login-links">
-                    <a href="./login.php">¿Ya tienes una cuenta? Inicia sesion</a>
-                </nav>
             </div>
         </div>
     </main>

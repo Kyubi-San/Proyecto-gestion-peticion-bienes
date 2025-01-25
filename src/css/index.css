@@ -1,7 +1,9 @@
 :root {
-    --primary-color: #3F72AF;
+    --primary-color: #2d3436;
     --secondary-color: #b2bec3;
     --tertiary-color: #F9F7F7;
+    --menu-color: #f5f6fa;
+    --menu-color-secondary: #2d3436;
 }
 
 body {
@@ -9,7 +11,7 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    background: url(../assets/5594016.jpg);
+    background: white;
     align-items: center;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
@@ -17,49 +19,12 @@ body {
 }
 
 .container {
-    width: 95%;
-    height: 95%;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
     background-color: var(--tertiary-color);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    padding: .4em;
-    border: 1px solid var(--secondary-color);  
-}
-
-.menu {
-    border-radius: 10px 0px 0px 10px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    color: white;
-    grid-row: span 5 / span 5;
-    width: 90%;
-    background: var(--primary-color);
-}
-
-.menu__header {
-    padding: .5em 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    border-bottom: 1px solid var(--secondary-color);
-}
-
-.menu__header--title {
-    font-size: 10px;
-    color: white;
-}
-
-.menu__logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
 }
 
 .main__header {
@@ -70,52 +35,39 @@ body {
 }
 
 .greeting {
-    color: #2d3436;
+    color: #2c3e50;
 }
 
-.menu__user--img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.notification {
+    font-size: 20px;
+    margin: 1em;
+    width: 30%;
+    position: relative;
+    text-align: right;
 }
 
-.menu__nav {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.menu__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.menu__item {
-    color: black;
-    display: flex;
-    list-style: none;
+.notification > i {
     cursor: pointer;
+}
+
+.notification__menu {
+    width: 100%;
     display: flex;
-    padding: 1em;
-    justify-content: left;
-    width: 60%;
+    flex-direction: column;
+    position: absolute;
+    background: #0984e3;
+    align-items: start;
+    border-radius: 10px;
 }
 
-.menu__item a {
+.notification__menu-item {
+    padding: .8em;
+    font-size: 16px;
     text-decoration: none;
-    color: white;
-}
-
-.menu__item:hover {
-    background-color: #00b894;
-}
-
-.menu__item:hover a {
-    color: white;
+    color: #ecf0f1;
+    border-radius: 10px;
+    display: flex;
+    gap: .8em;
 }
 
 .main {
@@ -142,5 +94,70 @@ body {
     background-color: white;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     color: black;
-}   
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #0984e3; /* Color de fondo verde para el encabezado */
+    color: white; /* Texto blanco en el encabezado */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo gris claro para filas pares */
+}
+
+tr:hover {
+    background-color: #74b9ff; /* Color de fondo verde suave al pasar el mouse */
+}
+
+.table__icon--check {
+    color: green;
+}
+
+.table__icon--decline {
+    color: #d63031;
+}
+.card__body {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.card__footer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    align-self: flex-end;
+    backdrop-filter: blur(3px);
+}
+
+.card__footer a {
+    color: #0984e3;
+    padding: .8em;
+    border: 1px solid #74b9ff;
+    background: var(--tertiary-color);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: .5s transform;
+    text-transform: capitalize;
+}
+
+.card__footer a:hover {
+    transform: scale(1.1);
+}
 
