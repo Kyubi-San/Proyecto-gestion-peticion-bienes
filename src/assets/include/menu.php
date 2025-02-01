@@ -19,8 +19,7 @@ function isActive($page) {
     flex-direction: column;
     position: relative;
     color: black;
-    grid-row: span 5 / span 5;
-    width: 85%;
+    grid-area: menu;
     background: var(--menu-color);
     border-right: #dfe6e9 1px solid;
     max-height: 100vh; /* Altura máxima de la ventana */
@@ -82,7 +81,7 @@ function isActive($page) {
     display: flex;
     padding: .8em;
     justify-content: left;
-    width: 90%;
+    width: 91%;
     border-radius: 10px;
     user-select: none;
 }
@@ -188,7 +187,7 @@ function isActive($page) {
                 <a href="register.php" class="menu__item menu__item-user">
                     <span>Datos Personales</span>
                 </a>
-                <a href="register.php" class="menu__item menu__item-user">
+                <a href="preguntas-seguridad.php" class="menu__item menu__item-user <?php echo isActive('preguntas-seguridad.php');?>">
                     <span>Preguntas de seguridad</span>
                 </a>
                 <?php if ($records['admin'] >= 1):?>

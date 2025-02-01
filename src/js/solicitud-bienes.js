@@ -32,3 +32,4 @@ function selectElectronico(tipoElectronico) {
         description.innerHTML = '<input type="text" placeholder="escriba el objeto electronico"><input type="text" placeholder="Agregar mas informacion">'
     }
 }
+

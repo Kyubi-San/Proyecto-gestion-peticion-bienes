@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion y solicitud de bienes</title>
     <link rel="stylesheet" href="css/index.css">
-    <link rel="shortcut icon" href="assets/logo-contraloria.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 </head>
 <body>
@@ -42,24 +42,68 @@ if (!isset($_SESSION['user_id'])) {
             </header>
             
             <div class="main__stats">
-                <div class="main__stats--item">
-                    <h3>Bienes</h3>
-                    <p>100</p>
+                <div class="stats__item">
+                    <a href="lista-bienes.php" class="stats__item-link">Ver Mas...</a>
+                    <picture class="stats__item-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </picture>
+                    <div class="stats__item-content" style="background: url(assets/bg-bienes.png); background-size: cover; background-position: right;">
+                        <div class="content__info" >
+                            <h3>Bienes</h3>
+                            <p>
+                                <?php
+                                $query = $conn->query("SELECT COUNT(*) as total FROM bienes");
+                                $row = $query->fetch(PDO::FETCH_ASSOC);
+                                echo $row['total'];
+                                ?>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="main__stats--item">
-                    <h3>Dependencias</h3>
-                    <p>100</p>
+                <div class="stats__item">
+                    <a href="administrar-usuarios.php" class="stats__item-link">Ver Mas...</a>
+                    <picture class="stats__item-icon">
+                        <i class="fa-solid fa-city"></i>
+                    </picture>
+                    <div class="stats__item-content" style="background: url(assets/bg-dependencia.jpg); background-size: cover; background-position: left;">
+                        <div class="content__info">
+                        <h3>Dependencias</h3>
+                        <p>
+                        <?php
+                        $query = $conn->query("SELECT COUNT(*) as total FROM usuario");
+                        $row = $query->fetch(PDO::FETCH_ASSOC);
+                        echo $row['total'];
+                        ?>
+                        </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="main__stats--item">
-                    <h3>Solicitudes</h3>
-                    <p>100</p>
+                <div class="stats__item">
+                    <a href="lista-solicitudes.php" class="stats__item-link">Ver Mas...</a>
+                    <picture class="stats__item-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </picture>
+                    <div class="stats__item-content" style="background: url(assets/bg-solicitudes.webp); background-size: cover; background-position: left;">
+                        <div class="content__info">
+                            <h3>Solicitudes</h3>
+                            <p>
+                            <?php
+                            $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes");
+                            $row = $query->fetch(PDO::FETCH_ASSOC);
+
+                            echo $row['total'];
+                            ?>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="main__cards">
                 <div class="card">
                     <div class="card__header">
-                        <h3>Ultimas solicitudes</h3>
+                        <span><h3>Ultimas solicitudes</h3></span>
+                        <a href="index.php">actualizar</a>
                     </div>
                     <div class="card__body
                     ">

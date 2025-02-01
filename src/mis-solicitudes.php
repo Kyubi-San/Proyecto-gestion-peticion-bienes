@@ -9,7 +9,7 @@ require '../server/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listado de Bienes</title>
+  <title>Mis solicitudes</title>
   <link rel="stylesheet" href="css/lista-bienes.css">
   <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 </head>

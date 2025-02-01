@@ -1,11 +1,15 @@
 var input = document.querySelectorAll('.login-input');
 var input2 = document.querySelectorAll('.login-input2');
+var input3 = document.querySelectorAll('.login-input3')
+
 var inputButton = document.getElementById('login-button');
 var password = document.getElementById('password');
 var confirmPassword = document.getElementById('confirm-password');
 var confirmPasswordError = document.getElementById('confirm-password-error');
 var inputError = document.querySelectorAll('.login-input-error');
 var inputError2 = document.querySelectorAll('.login-input-error2');
+var inputError3 = document.querySelectorAll('.login-input-error3')
+
 var loginBack = document.getElementById('login-back')
 
 var greeting = document.getElementById('login-greeting');
@@ -18,20 +22,26 @@ var form = document.getElementById('login-form');
 function validateInput(input, inputError) {
     let pass = 0;
 
+    for (let i = 0; i < input.length; i++) {        
+        if (input[i].value != "") {
+            pass++
+        }
+    }
+    return pass
+}
+
+function showError(input, inputError) {
     for (let i = 0; i < input.length; i++) {
         let campo = input[i].getAttribute('name')
         
         if (input[i].value != "") {
             input[i].style.borderLeft = "5px solid #0984e3"
             inputError[i].innerHTML = '';
-
-            pass++
         } else {
             input[i].style.borderLeft = "5px solid red"
             inputError[i].innerHTML = 'Ingresa tu ' + campo;
         }
     }
-    return pass
 }
 
 // Funcion para validar si la confirmacion y la contraseña son iguales
@@ -50,7 +60,7 @@ function validatePassword(password, confirmPassword) {
     }
 }
 
-// Funcion para ocultar los input de la primera o segunda parte
+// Funcion para ocultar los input
 
 function ocultarInput(input, inputError) {
     for (let i = 0; i < input.length; i++) {
@@ -60,6 +70,8 @@ function ocultarInput(input, inputError) {
         }
     }
 }
+
+// Mostrar los input
 
 function mostrarInput(input, inputError) {
     for (let i = 0; i < input.length; i++) {
@@ -73,24 +85,40 @@ function mostrarInput(input, inputError) {
     }
 }
 
+// Envio de formulario
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+
     pass = validateInput(input, inputError)
+    showError(input, inputError)
 
     validatePassword(password, confirmPassword)
     validateInput(input, inputError)
     
     if (pass == input.length && validatePassword(password, confirmPassword)) {
+        let pass2 = validateInput(input2, inputError2)
+        let pass3 = validateInput(input3, inputError3)
+
         greeting.innerHTML = "¡Ya casi esta listo!"
         tip.innerHTML = "Haz click si quieres volver atras"
-        inputButton.innerHTML = "Ingresar"
+        inputButton.innerHTML = "Continuar"
         
         ocultarInput(input, inputError)
 
-        if (mostrarInput(input2, inputError2)) {
-            pass2 = validateInput(input2, inputError2)
-            if (pass2 == input2.length) {
-                form.submit()
+        if (pass2 == input2.length) {
+            if (mostrarInput(input3, inputError3)) {
+                if (pass3 == input3.length) {
+                    form.submit()
+                } else {
+                    showError(input3, inputError3)
+                }
+            } else {
+                ocultarInput(input2, inputError2)
+            }
+        } else {
+            if (mostrarInput(input2, inputError2)) {
+                showError(input2, inputError2)
             }
         }
     }

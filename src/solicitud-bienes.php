@@ -48,27 +48,36 @@ if ($_POST) {
     <?php include 'assets/include/menu.php'?>
     <main class="main">
         <form action="" method="post" class="form" autocomplete="off">
-            <h1>Solicitud De Bienes</h1>
-            <label for="tipo_bien">Tipo de Bien:</label>
-            <select id="tipo_bien" name="tipo_bien" required>
-                <option value="" selected disabled>Categoria del bien a solicitar</option>
-                <option value="Electronico">Electrónico</option>
-                <option value="Mueble">Mueble</option>
-                <option value="Herramienta">Herramienta</option>
-            </select>
-            
-            <label for="descripcion">Descripción del Bien:</label>
-            <div id="description-values">
+            <h2>Solicitud De Bienes</h2>
+            <h3>Ingresa los detalles</h3>
+            <div class="input-container">
+                <input type="text" class="input" name="" id="" placeholder=" ">
+                <label for="input" class="placeholder">Titulo</label>
             </div>
 
-            <div id="description" disabled></div>
+            <div class="input-container">
+                <select id="tipo_bien" class="input" name="tipo_bien" required>
+                    <option value="" selected disabled>Selecciona una categoria</option>
+                    <option value="Electronico">Electrónico</option>
+                    <option value="Mueble">Mueble</option>
+                    <option value="Herramienta">Herramienta</option>
+                </select>
+                <label for="input" class="placeholder--category">Categoria</label>
+            </div>
+
+            <textarea name="" id="" placeholder="Descripcion"></textarea>
             <label for="comentario">Comentario:</label>
             <textarea id="comentario" name="comentario"></textarea>
             
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+            <div class="input-container">
+                <input type="password" class="input" id="password" name="password" placeholder=" " required>
+                <label for="password" class="placeholder">Contraseña:</label>
+            </div>
             
-            <input type="submit" value="Solicitar">
+            <div class="button__group">
+                <a href="index.php" class="input__button input__button--cancel">Cancelar</a>
+                <input type="submit" value="Solicitar" class="input__button">
+            </div>
         </form>
     </main>
     </div>

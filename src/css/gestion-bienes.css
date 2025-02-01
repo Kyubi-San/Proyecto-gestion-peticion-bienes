@@ -4,6 +4,10 @@
     --tertiary-color: #F9F7F7;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -21,13 +25,15 @@ body {
     height: 100vh;
     background-color: var(--tertiary-color);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: 
+        "menu main"
+    ;
+    grid-template-columns: 300px 1fr;
+    gap: 10px;
 }
 
 .main {
-    grid-column: span 3 / span 3;
-    grid-row: span 5 / span 5;
+    grid-area: main;
     display: flex;
     flex-direction: column;
     align-items: center;

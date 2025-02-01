@@ -27,8 +27,10 @@ body {
     height: 100%;
     background-color: var(--tertiary-color);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: 
+        "menu main"
+    ;
+    grid-template-columns: 300px 1fr;
 }
 
 .menu__item {
@@ -45,8 +47,9 @@ body {
 }
 
 .main {
-    grid-column: span 3 / span 3;
-    grid-row: span 5 / span 5;
+    grid-area: main;
+    margin: 0 10px;
+
 }
 
 table {
