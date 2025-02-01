@@ -182,3 +182,31 @@ textarea {
     padding: 5px;
 }
 
+.tipo {
+    width: 40%;
+}
+
+#description {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    height: 50px;
+    padding: .5em;
+    margin-bottom: 1em;
+}
+
+#description input[type="text"] {
+    padding: 5px;
+    margin-bottom: 0px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #636e72;
+    border-radius: 0px;
+}
+
+#description span {
+    background: #dfe6e9;
+    padding: 5px;
+}
+
