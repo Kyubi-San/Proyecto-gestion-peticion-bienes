@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
   header('Location: login.php');
 }
 
+$message = "";
+
 if ($_POST) {
 
     # Esquema
@@ -37,10 +39,8 @@ if ($_POST) {
     $verif_email->execute();
     $results = $verif_email->fetch(PDO::FETCH_ASSOC);
 
-    if ($results) {
-     
-      header('location: signup.php');
-      echo "Este correo ya esta registrado";
+    if ($results) {     
+      $message = "Este correo ya esta registrado";
 
     } else {
 
@@ -87,6 +87,7 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | Contraloria</title>
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/register.css">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 </head>
@@ -114,9 +115,9 @@ if ($_POST) {
                     <span class="login-input-error"></span>
                     <input type="text" class="login-input" name="usuario" placeholder="Usuario">
                     <span class="login-input-error"></span>
-                    <input type="password" class="login-input" id="password" name="contrasena" placeholder="Contraseña">
+                    <input type="password" class="login-input" minlength="8" id="password" name="contrasena" placeholder="Contraseña">
                     <span class="login-input-error"></span>
-                    <input type="password" class="login-input" id="confirm-password" name="confirmacioncontrasena" placeholder="Confirmar contraseña">
+                    <input type="password" class="login-input" minlength="8" id="confirm-password" name="confirmacioncontrasena" placeholder="Confirmar contraseña">
                     <span class="login-input-error" id="confirm-password-error"></span>
                     <input type="email" class="login-input" name="email" placeholder="Correo">
                     <span class="login-input-error"></span>
@@ -161,6 +162,7 @@ if ($_POST) {
                     <span class="login-input-error3" hidden></span>
                     
                     <button type="submit" class="login-button" id="login-button"><span>Continuar</span></button>
+                    <span><?php echo $message;?></span>
                 </form>
             </div>
         </div>

@@ -4,7 +4,7 @@ require '../server/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
-  }
+}
 
 ?>
 
@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </header>
             
-            <div class="main__stats">
+            <section class="main__stats">
                 <div class="stats__item">
                     <a href="lista-bienes.php" class="stats__item-link">Ver Mas...</a>
                     <picture class="stats__item-icon">
@@ -97,59 +97,67 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="main__cards">
-                <div class="card">
-                    <div class="card__header">
-                        <span><h3>Ultimas solicitudes</h3></span>
-                        <a href="index.php">actualizar</a>
-                    </div>
-                    <div class="card__body
-                    ">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Solicitante</th>
-                                    <th>Fecha</th>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Tipo</th>
-                                    <th>Comentario</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                $num = 1;
-                                foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE aprobado = 0 LIMIT 10') as $row):
-                                $num++;
-                                ?>
-                                    <tr>
-                                        <td><?php echo $row['n_solicitud']; ?></td>
-                                        <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['bien']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                                        <td><?php echo $row['tipo_bien']; ?></td>
-                                        <td><?php echo htmlspecialchars($row['comentario']); ?></td>
-                                        <td>
-                                            <a href="gestion-solicitudes.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--check" title="Aprobar"><i class="fa-solid fa-check"></i></a>
-                                            /
-                                            <a href="" class="table__icon--decline" title="Rechazar"><i class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?> 
-                            </tbody>
-                        </table> 
-                        <?php echo $num > 8 ? '<footer class="card__footer">
-                            <a href="lista-solicitudes.php">Mostrar Todas</a>
-                        </footer>' : ''?>                      
-                    </div>
+            </section>
+            <section class="card">
+                <div class="card__header">
+                    <h3>Ultimas solicitudes</h3>
+                    <a href="index.php">actualizar</a>
                 </div>
-            </div>
+                <div class="card__body">
+                <?php
+            $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes WHERE aprobado = 0");
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($row['total'] < 1) {
+              echo '
+              <div class="myEstate__message">
+                <p>No hay solicitudes pendientes</p>
+                <i class="fa-solid fa-ghost"></i>
+              </div>';
+            }
+          ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Solicitante</th>
+                                <th>Fecha</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Tipo</th>
+                                <th>Comentario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            $num = 1;
+                            foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE aprobado = 0 ORDER BY n_solicitud DESC LIMIT 9') as $row):
+                            $num++;
+                            ?>
+                                <tr>
+                                    <td><?php echo $row['n_solicitud']; ?></td>
+                                    <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['bien']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                                    <td><?php echo $row['tipo_bien']; ?></td>
+                                    <td><?php echo htmlspecialchars($row['comentario']); ?></td>
+                                    <td>
+                                        <a href="gestion-solicitudes.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--check" title="Aprobar"><i class="fa-solid fa-check"></i></a>
+                                        /
+                                        <a href="rechazar-solicitud.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--decline" title="Rechazar"><i class="fa-solid fa-xmark"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table> 
+                    <?php echo $num > 8 ? '<footer class="card__footer">
+                        <a href="solicitudes-pendientes.php">Mostrar Todas</a>
+                    </footer>' : ''?>                      
+                </div>
+            </section>
         </main>
     </div>
 </body>

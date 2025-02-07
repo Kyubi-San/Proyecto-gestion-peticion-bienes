@@ -40,17 +40,25 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Contraloria</title>
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/login.css">
+    <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <main class="login-container">
         <header class="login-header">
             <div class="login-company">
-                <img src="assets/logo-sistema.jpg" alt="Logo de la Contraloria" class="login-company-logo">
+              <div class="login-information">
+                <img src="assets/logo-contraloria.jpg" class="login-company-logo" alt="logo de la contraloria municipal de Guanipa">
                 <h2>Contraloria Municipal de Guanipa</h2>
+              </div>
+              <div>
+                <a href="https://github.com/Kyubi-San/Proyecto-gestion-peticion-bienes" target="_blank" class="login-repository "><i class="fa-brands fa-square-github"></i></a>
+                </div>
             </div>
 
             <div class="login-welcome">
+                <picture class="login-welcome-logo"><img src="assets/logo-sistema.png" class="login-welcome-logo--system" alt="Logo del sistema"><img src="assets/sea-waves.webp" class="login-welcome-logo--detail" alt=""><img src="assets/waves2.jpg" class="login-welcome-logo--bubble" alt=""></picture>
                 <h2>Sistema de gestion y solicitud de bienes</h2>
                 <p>Por favor inicia sesión para continuar</p>
             </div>

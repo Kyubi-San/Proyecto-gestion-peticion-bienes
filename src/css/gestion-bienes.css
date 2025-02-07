@@ -6,6 +6,7 @@
 
 * {
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -23,7 +24,7 @@ body {
 .container {
     width: 100%;
     height: 100vh;
-    background-color: var(--tertiary-color);
+    background-color: #fff;
     display: grid;
     grid-template-areas: 
         "menu main"
@@ -46,37 +47,49 @@ body {
 }
 
 .form {
-    box-sizing: border-box;
+    border: 1px solid #bdc3c7;
+    width: 50%;
+    height: 95%;
+    border-radius: 5px;
+    background: white;
+    padding: 1em;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    border-radius: 5px;
-    background: #ecf0f1;
-    padding: 1em;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.form h2 {
+    margin: 10px 0;
 }
 
 .form-group {
     width: 100%;
     display: flex;
-    margin: 10px;
-    gap: 20px;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .form-group div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group--button {
+    display: flex;
+    justify-content: right;
+    gap: 1em;
+    align-items: flex-end;
     flex-grow: 1;
 }
 
-input, select {
+.form__input {
     padding: 10px;
     margin: 10px 0;
-    box-sizing: border-box;
     border-radius: 5px;
     background: none;
     outline:none;
     border: 1px solid #ccc;
-    flex-grow: 1;
+    color: #2c3e50;
 }
 
 input:disabled, select:disabled {
@@ -85,42 +98,33 @@ input:disabled, select:disabled {
 }
 
 .form-button {
-    background: #3498db;
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
+    background: white;
+    color: black;
+    padding: 10px 15px;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
     border-radius: 5px;
     text-align: center;
-    text-decoration: none;
-    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #ccc;
     transition: .3s background;
 }
 
-.form-button:hover {
-    background: #2980b9;
+.form-button--decline {
+    background: #ee5253;
+    color: white;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.form-button--accept {
+    color: white;
+    background-color: #3498db;
+    border: 1px solid #3498db;
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
+.form-button--decline:hover {
+    background: #c0392b;
 }
 
-th {
-    background: #4caf50; /* Color de fondo verde para el encabezado */
-    color: white; /* Texto blanco en el encabezado */
-}
 
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo gris claro para filas pares */
-}
-
-tr:hover {
-    background-color: #a5d6a7; /* Color de fondo verde suave al pasar el mouse */
-}

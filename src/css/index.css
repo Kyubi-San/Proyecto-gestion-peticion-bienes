@@ -26,12 +26,19 @@ body {
 .container {
     width: 100%;
     height: 100%;
-    background-color: var(--tertiary-color);
+    background-color: #fff;
     display: grid;
     grid-template-areas: 
         "menu main"
     ;
     grid-template-columns: 300px 1fr;
+}
+
+.main {
+    grid-area: main;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .main__header {
@@ -67,6 +74,10 @@ body {
     border-radius: 10px;
 }
 
+.notification__menu:hover i {
+    animation: 2s linear 0s infinite alternate bounce;
+}
+
 .notification__menu-item {
     padding: .8em;
     font-size: 16px;
@@ -75,11 +86,6 @@ body {
     border-radius: 10px;
     display: flex;
     gap: .8em;
-}
-
-.main {
-    grid-area: main;
-    margin: 0 10px;
 }
 
 .main__stats {
@@ -105,6 +111,8 @@ body {
     ;
     grid-template-rows: 1fr 40px;
     grid-template-columns: 1fr;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .stats__item-content {
@@ -116,9 +124,18 @@ body {
     background-repeat: no-repeat;
 }
 
+.stats__item:hover .stats__item-content {
+    background-size: 150%;
+}
+
+.stats__item-content h3 {
+    color: #2c3e50;
+}
+
 .content__info {
     margin: 0 1em;
     font-weight: bolder;
+    color: #2980b9;
 }
 
 .stats__item::after {
@@ -135,17 +152,16 @@ body {
 .stats__item-link {
     opacity: 0;
     position: absolute;
-    border: 1px solid #3498db;
+    background-color: white;
     color: #2980b9;
-    background-color: #ffffff;
     align-self: center;
-    z-index: 100;
-    transition: opacity .5s;
+    z-index: 99;
+    transition: opacity .5s, transform .3s ease-in-out;
     justify-self: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espaciado interno */
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    transform: translateY(50%);
 }
 
 .stats__item-link:active {
@@ -153,16 +169,12 @@ body {
     color: #ffffff; /* Color del texto al hacer clic */
 }
 
-.stats__item:hover .stats__item-link, .stats__item:hover::after{
+.stats__item:hover .stats__item-link, .stats__item:hover::after {
     opacity: 1;
 }
 
-.stats__item:hover .stats__item-content {
-    background-size: 150%;
-}
-
-.stats__item-content h3 {
-    color: #2c3e50;
+.stats__item:hover .stats__item-link {
+    transform: translateY(0);
 }
 
 .stats__item-icon {
@@ -180,99 +192,166 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-
+    cursor: pointer;
 }
 
 th, td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ced6e0;
     text-align: center;
+    max-width: 200px;
+    overflow: hidden;
 }
 
 th {
-    background: #0984e3; /* Color de fondo verde para el encabezado */
-    color: white; /* Texto blanco en el encabezado */
-    
+    color: #2980b9; /* Texto blanco en el encabezado */
+    background: #ecf0f1;
+}
+
+tr {
+    background: #ecf0f1;
+    color: #34495e;
 }
 
 tr:nth-child(even) {
-    background-color: #ecf0f1; /* Color de fondo gris claro para filas pares */
+    background-color: #bdc3c7;
+    color: #2d3436;
 }
 
 tr:hover {
-    background-color: #74b9ff; /* Color de fondo verde suave al pasar el mouse */
+    background-color: #95a5a6; /* Color de fondo verde suave al pasar el mouse */
 }
 
 .table__icon--check {
-    color: green;
+    color: #2ecc71;
 }
 
 .table__icon--decline {
     color: #d63031;
 }
 
+.card {
+    background: #f5f6fa;
+    padding: .4em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: relative;
+    overflow: hidden;
+    margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card__body {
+    overflow-y:auto;
+    display: flex;
+    position: relative;
+    width: 100%;
+    text-wrap: nowrap;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-top: none;
+    background: #f1f2f6;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
 .card__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px 0;
+    margin-bottom: 10px;
     display: flex;
     border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: .3em .5em;
 }
 
 .card__header a {
+    background-color: #0984e3;
     color: #ffffff;
-    background-color: #007bff;
+    border-color: #ffffff;
     font-size: 1em;
     padding: 10px;
-    border: none;
     border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: all .3s;
 }
 
 .card__header a:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #0097e6;
 }
 
 .card__header h3 {
     margin: 0;
     font-size: 1.5em;
-    color: #343a40;
-}
-
-.card__body {
-    display: flex;
-    position: relative;
-    height: 100%;
-    width: 100%;
+    color: #2c3e50;
+    user-select: none;
 }
 
 .card__footer {
-    position: absolute;
     display: flex;
-    justify-content: center;
+    position: absolute;
     align-items: center;
-    width: 100%;
+    justify-content: center;
     height: 20%;
-    align-self: flex-end;
     backdrop-filter: blur(3px);
+    width: 100%;
+    align-self: flex-end;
 }
 
 .card__footer a {
-    color: #0984e3;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     padding: .8em;
-    border: 1px solid #74b9ff;
-    background: var(--tertiary-color);
+    border: none;
+    background-color: #007bff;
+    color: white;
     text-decoration: none;
     border-radius: 5px;
-    transition: .5s transform;
+    transition: .5s all;
     text-transform: capitalize;
 }
 
 .card__footer a:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    background-color: #0097e6;
 }
+
+.myEstate__message {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.myEstate__message p {
+    font-size: 1.2em;
+    color: #343a40;
+    margin: 10px 0;
+}
+
+.myEstate__message i {
+    font-size: 2em;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+@keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
 
 @media(max-width: 700px) {
     body {

@@ -1,0 +1,124 @@
+.filters {
+    margin: 20px 0;
+    position: relative;
+}
+
+.filters--text {
+    color: #3498db;
+}
+
+.filters__menu {
+    position: absolute;
+    width: 80%;
+    display: none;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    background: white;
+    flex-wrap: wrap;
+    margin: 0 1em;
+}
+
+.filter__menu-button {
+    cursor: pointer;
+    user-select: none;
+}
+
+.visible--flex {
+    display: flex;
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.filters__menu-estateDate h4, .filters__menu-estateInfo h4 {
+    font-weight: lighter;
+    color: black;
+}
+
+.filters__menu-estateInfo {
+    border: #dee2e6 1px solid;
+    width: 50%;
+    padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    color: #2c3e50;
+    padding-bottom: 1em;
+}
+
+.estateInfo__filter {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 90%;
+}
+
+.filters__input {
+    padding: 5px;
+    margin: 0 10px;
+    border: 2px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.filters__input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.filters__button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filters__button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.filters__button:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+.filters__menu-footer {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    margin: 1em;
+    gap: 1em;
+    align-items: center;
+}
+
+.filters__menu-footer-button {
+    background: #7f8c8d;
+    color: white;
+    padding: 10px 12px;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+}
+
+.filters__menu-footer-button--apply {
+    background: #3498db;
+}
+
+.filters__menu-footer-reset {
+    user-select: none;
+    cursor: pointer;
+    color: gray;
+}

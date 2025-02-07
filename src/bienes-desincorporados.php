@@ -20,25 +20,26 @@ require '../server/db.php';
     <header class="main__header">
       <i class="fas fa-box"></i>
         <div class="main__header-title">
-          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a> / Mis bienes</span>
-          <h2>Mis bienes</h2>
+          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a > / Mis bienes</span>
+          <h2>Mis bienes desincorporados</h2>
         </div>
     </header>
     <main class="main">
         <?php include 'assets/include/filters.php' ?>
         <section class="myEstates">
           <?php
-            $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE responsible =".$_SESSION['user_id']);
+            $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate != '0000-00-00' AND responsible =".$_SESSION['user_id']);
             $row = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($row['total'] < 1) {
               echo '
               <div class="myEstate__message">
-                <p>Oh, parece que aun no tienes ningun bien</p>
+                <p>No tienes ningun bien desincorporado</p>
                 <i class="fa-solid fa-ghost"></i>
               </div>';
             }
           ?>
+          
           <table id="goodsTable">
             <thead>
               <tr>
@@ -48,13 +49,14 @@ require '../server/db.php';
                 <th>Tipo de Bien</th>
                 <th>Fecha Solicitud</th>
                 <th>Fecha Aprobación</th>
+                <th>Fecha de retiro</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row):
+              foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate != "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row):
               ?>
               <tr class="table-dates">
                 <td><?php echo htmlspecialchars($row['id']); ?></td>
@@ -63,6 +65,7 @@ require '../server/db.php';
                 <td><?php echo htmlspecialchars($row['type']); ?></td>
                 <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
+                <td><?php echo htmlspecialchars($row['withdrawalDate']); ?></td>
                 <td>
                   <a href=".php?id=<?php echo $row['id']; ?>">Editar</a>
                   <a href="retiro-bien.php?id=<?php echo $row['id']; ?>">Eliminar</a>

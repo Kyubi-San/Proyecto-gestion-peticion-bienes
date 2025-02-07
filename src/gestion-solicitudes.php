@@ -1,7 +1,23 @@
 <?php
 
-require '../server/db.php';
 require 'assets/include/session_start.php';
+require '../server/db.php';
+
+if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
+  header('Location: login.php');
+}
+
+function generateID($length = 10) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charactersLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  return $randomString;
+}
+
+$uuid = generateID(10);
 
 $query = $conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE n_solicitud ='.$_GET["id"]);
 $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -27,9 +43,10 @@ if ($_POST) {
     
     # Esquema de la tabla
   
-      $stmt = $conn->prepare("INSERT INTO bienes (name, description, type, requestDate, comments, responsible) VALUES (:name, :description, :type, :requestDate, :comments, :responsable)");
+      $stmt = $conn->prepare("INSERT INTO bienes (id, name, description, type, requestDate, comments, responsible) VALUES (:uuid, :name, :description, :type, :requestDate, :comments, :responsable)");
       $stmt2 = $conn->prepare("UPDATE solicitudes SET aprobado = '1' WHERE n_solicitud = :id");
   
+      $stmt->bindParam(':uuid', $uuid);
       $stmt->bindParam(':requestDate', $requestDate);
       $stmt->bindParam(':comments', $comments);
       $stmt->bindParam(':name', $name);
@@ -54,6 +71,7 @@ if ($_POST) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestión de Solicitudes</title>
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/gestion-bienes.css" />
     <script src="js/sweetalert2.js"></script>
@@ -65,67 +83,53 @@ if ($_POST) {
 
       <form action="" class="form" method="POST" id="form">
         <div class="form-group">
-          <div>
-            <label for="">ID:</label>
-            <input
-            type="number"
-            value="<?php echo $id;?>"
-            id="newId"
-            placeholder="ID del bien"
-            min="1"
-            name="id"
-            disabled
-           />
-          </div>
-          <div>
-            <label for="">Nombre del bien:</label>
-            <input type="text" value="<?php echo $name;?>" name="name" id="newName" placeholder="Nombre del bien"/>
-          </div>
-          <div>
-            <label for="">Descripcion:</label>
-            <input type="text" value="<?php echo $description;?>" name="description" id="newDescription" placeholder="Descripción"/>
-          </div>
+          <label for="">ID:</label>
+          <input
+          type="number"
+          value="<?php echo $id;?>"
+          id="newId"
+          placeholder="ID del bien"
+          min="1"
+          name="id"
+          disabled
+          class="form__input"
+         />
         </div>
-
         <div class="form-group">
-            <div>
-                <label for="newType">Tipo de Bien:</label>
-                <select id="newType" name="type">
-                <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
-                <option value="Electrónico">Electrónico</option>
-                <option value="Mueble">Mueble</option>
-                <option value="Vehículo">Vehículo</option>
-                <option value="Herramienta">Herramienta</option>
-                </select>
-            </div>
-            <div>
-                <label for="newType">Responsable:</label>
-                <select name="" id="" name="responsible">
-                    <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
-                    <?php
-                        foreach ($conn->query('SELECT * from usuario') as $row) {
-                            echo '<option value="'.$row['n_dependencia'].'">'.$row['nombre_dependencia'].'</option>';
-                        }
-                        ?>
-                </select>
-            </div>
-            <div>
-              <label for="newType">Comentario:</label>
-              <input type="text" value="<?php echo $comments;?>" id="comments" placeholder="Comentarios" name="comments"/>
-            </div>
+          <label for="">Nombre del bien:</label>
+          <input type="text" class="form__input" value="<?php echo $name;?>" name="name" id="newName" placeholder="Nombre del bien"/>
+        </div>
+        <div class="form-group">
+          <label for="">Descripcion:</label>
+          <input type="text" class="form__input" value="<?php echo $description;?>" name="description" id="newDescription" placeholder="Descripción"/>
         </div>
         
         <div class="form-group">
-            <div>
-                <label for="requestDate">Fecha de Solicitud:</label>
-                <input type="date" value="<?php echo $requestDate;?>" name="requestDate" id="requestDate" />
-            </div>
+            <label for="newType">Tipo de Bien:</label>
+            <select id="newType" name="type" class="form__input">
+              <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
+            </select>
         </div>
         <div class="form-group">
-          <button class="form-button" type="submit">Aceptar Solicitud</button>
-          <a href="lista-solicitudes.php" class="form-button">Volver</a>
+            <label for="newType">Responsable:</label>
+            <select name="" id="" name="responsible" class="form__input">
+                <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="newType">Comentario:</label>
+          <input type="text" class="form__input" value="<?php echo $comments;?>" id="comments" placeholder="Comentarios" name="comments"/>
+        </div>
+    
+        <div class="form-group">
+            <label for="requestDate">Fecha de Solicitud:</label>
+            <input type="date" class="form__input" value="<?php echo $requestDate;?>" name="requestDate" id="requestDate" />
+        </div>
+        <div class="form-group--button">
+          <a href="solicitudes-pendientes.php" class="form-button">Volver</a>
+          <button class="form-button form-button--accept" type="submit">Aceptar Solicitud</button>
         </div>        
-      </form>
+    </form>
       
       </main>
     </div>

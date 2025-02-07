@@ -8,25 +8,22 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if ($_POST) {
+    $bien = htmlspecialchars($_POST['bien']);
     $tipo_bien = htmlspecialchars($_POST['tipo_bien']);
-    $descripcion = htmlspecialchars($_POST['bienSpec']) .' '.htmlspecialchars($_POST['tipo-informacion']);
+    $descripcion = htmlspecialchars($_POST['descripcion']);
     $comentario = htmlspecialchars($_POST['comentario']);
     $password = htmlspecialchars($_POST['password']);
     $responsible = $_SESSION['user_id'];
-    echo $descripcion;
 
-    if (!empty($bien) && !empty($tipo_bien) && !empty($descripcion) && !empty($password)) {
+    if (!empty($bien) && !empty($tipo_bien) && !empty($password)) {
         $stmt = $conn->prepare("INSERT INTO solicitudes (bien, tipo_bien, descripcion, comentario, id_usuario) VALUES (:bien, :tipo_bien, :descripcion, :comentario, :responsible)");
-
         $stmt->bindParam(':bien', $bien);
         $stmt->bindParam(':tipo_bien', $tipo_bien);
         $stmt->bindParam(':descripcion', $descripcion);
         $stmt->bindParam(':comentario', $comentario);
         $stmt->bindParam(':responsible', $responsible);
-
         try {
-            $stmt->execute();
-
+          $stmt->execute();
         } catch (\Throwable $th) {
             echo "Error al insertar el bien";
         }
@@ -40,8 +37,9 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitud De Bienes</title>
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/solicitud-bienes.css">
-  <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+    <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -51,8 +49,8 @@ if ($_POST) {
             <h2>Solicitud De Bienes</h2>
             <h3>Ingresa los detalles</h3>
             <div class="input-container">
-                <input type="text" class="input" name="" id="" placeholder=" ">
-                <label for="input" class="placeholder">Titulo</label>
+                <input type="text" id="bien" class="input" name="bien" placeholder=" ">
+                <label for="bien" class="placeholder">Titulo</label>
             </div>
 
             <div class="input-container">
@@ -61,12 +59,13 @@ if ($_POST) {
                     <option value="Electronico">Electrónico</option>
                     <option value="Mueble">Mueble</option>
                     <option value="Herramienta">Herramienta</option>
+                    <option value="Otro">Otro...</option>
                 </select>
-                <label for="input" class="placeholder--category">Categoria</label>
+                <label for="tipo_bien" class="placeholder--category">Categoria</label>
             </div>
 
-            <textarea name="" id="" placeholder="Descripcion"></textarea>
-            <label for="comentario">Comentario:</label>
+            <textarea name="descripcion" placeholder="Descripcion"></textarea>
+            <label for="comentario">Comentario al administrador:</label>
             <textarea id="comentario" name="comentario"></textarea>
             
             <div class="input-container">

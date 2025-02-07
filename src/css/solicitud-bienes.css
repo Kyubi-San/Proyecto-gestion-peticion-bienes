@@ -1,3 +1,5 @@
+
+
 body {
     margin: 0;
     padding: 0;
@@ -17,7 +19,7 @@ body {
 
 .container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: var(--tertiary-color);
     display: grid;
     grid-template-areas: 
@@ -32,6 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .form {
@@ -40,12 +43,15 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 50%;
-    height: 90%;
+    height: 95%;
     border: 1px solid #bdc3c7;
+    display: flex;
+    flex-direction: column;
 }
 
 .form h1 {
     color: #2c3e50;
+
 }
 
 .form h3 {
@@ -61,7 +67,7 @@ label {
 
 .input-container {
     position: relative;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .input {
@@ -80,6 +86,8 @@ label {
     justify-content: right;
     gap: 1em;
     margin-top: 1em;
+    flex-grow: 1;
+    align-items: flex-end;
 }
 
 .input__button {
@@ -87,7 +95,6 @@ label {
     color: white;
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     display: inline-block;
     border-radius: 5px;
@@ -208,5 +215,29 @@ textarea {
 #description span {
     background: #dfe6e9;
     padding: 5px;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.result__content {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.result__content-text {
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    color: #2d3436;
+    user-select: none;
 }
 

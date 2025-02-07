@@ -38,6 +38,7 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Contraloria</title>
+    <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/forgot-password.css">
 </head>
 <body>
