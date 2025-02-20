@@ -69,10 +69,16 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 <h1 class="login-title">Iniciar Sesión</h1>                
                 <form action="" method="POST" id="login-form">
                     <label for="email" class="login-label">Ingresa tu Correo Electronico</label>
-                    <input type="text" id="email" class="login-input" name="email" placeholder="Correo electrónico">
+                    <div class="form__input-container">                   
+                      <input type="text" id="email" class="login-input" name="email" placeholder="Correo electrónico">
+                      <i class="fa-solid fa-envelope input__icon"></i>
+                    </div>
 
                     <label for="password" class="login-label">Ingresa tu Contraseña</label>
-                    <input type="password" id="password" class="login-input" name="password" placeholder="Contraseña">
+                    <div class="form__input-container">
+                      <input type="password" id="password" class="login-input" name="password" placeholder="Contraseña">
+                      <i class="fa-solid fa-key input__icon"></i>
+                    </div>
                     <button type="submit" class="login-button">Ingresar</button>
                 </form>
                 <nav class="login-links">

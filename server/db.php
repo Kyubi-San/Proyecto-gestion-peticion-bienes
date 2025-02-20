@@ -13,7 +13,7 @@ try {
 }
 
 if (isset($_SESSION["user_id"])) {
-  $records = $conn->prepare("SELECT username, nombre, contrasena, admin FROM usuario WHERE n_dependencia =".$_SESSION['user_id']); 
+  $records = $conn->prepare("SELECT username, nombre, apellido, cedula, contrasena, admin FROM usuario WHERE n_dependencia =".$_SESSION['user_id']); 
   # acordarme de corregir esto
   $records->execute();
   $records = $records->fetch(PDO::FETCH_ASSOC);

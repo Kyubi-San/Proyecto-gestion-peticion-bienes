@@ -32,6 +32,23 @@ require '../server/db.php';
     <main class="main">
       <?php include 'assets/include/filters.php'; ?>
         <section class="myEstates">
+        <div class="myEstates__header">
+            <div class="myEstates__header-title">
+              <img src="assets/logo-contraloria.jpg" class="myEstates__header-logo" alt="">
+              <div class="myEstates__header-data">
+                <b>Contraloria municipal de Guanipa</b>
+                <span>Sistema de solicitud y gestion de bienes</span>
+              </div>
+            </div>
+            <div class="myEstates__header-info">
+              <h4>Todas las solicitudes</h4>
+              <span class="myEstates__header-total">Total: <?php
+              $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes");
+              $row = $query->fetch(PDO::FETCH_ASSOC);
+              echo $row['total'];
+              ?></span>
+            </div>
+          </div>
           <?php
             $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes");
             $row = $query->fetch(PDO::FETCH_ASSOC);

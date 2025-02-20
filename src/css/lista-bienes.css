@@ -73,7 +73,7 @@ body {
 }
 
 #menu-request:target ~ .menu__item-request {
-    display: block; /* Muestra los elementos cuando el enlace es seleccionado */
+    display: block;
 }
 
 .main__header-currentDir--pre {
@@ -105,6 +105,56 @@ body {
     border: 1px solid #dee2e6;
     overflow-y: scroll;
     user-select: none;
+}
+
+.myEstates__header {
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    background: #f5f6fa;
+    justify-content: space-between;
+    border-bottom: #ddd 1px solid;
+    z-index: 100;
+}
+
+.myEstates__header-title {
+    display: flex;
+    width: 50%;
+    gap: 1em;
+    align-items: center;
+}
+
+.myEstates__header-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #34495e;
+}
+
+.myEstates__header-title b {
+    color: #2c3e50;
+}
+
+.myEstates__header-logo {
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.myEstates__header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+    color: #34495e;
+}
+
+.myEstates__header-info h4 {
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
 }
 
 table {
@@ -174,3 +224,38 @@ tr:hover {
 .table__icon--decline {
     color: #d63031;
 }
+
+.table__icon--delete {
+    color: #d63031;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .myEstates {
+        visibility: visible;
+        position: absolute;
+        overflow: hidden;
+        margin: 0;
+        left: 0;
+        top: 0;
+        height: auto;
+        overflow-wrap: anywhere;
+    }
+
+    .table-actions {
+        display: none;
+    }
+
+    .myEstates * {
+        visibility: visible;
+    }
+
+    #goodsTable {
+        margin-top: 0px;
+    }
+}
+
+@page { size: landscape; }

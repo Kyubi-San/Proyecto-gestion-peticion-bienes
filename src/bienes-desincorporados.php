@@ -13,6 +13,7 @@ require '../server/db.php';
   <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
   <link rel="stylesheet" href="css/lista-bienes.css">
   <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+  <script src="js/desplegar-tabla.js"></script>
 </head>
 <body>
   <div class="container">
@@ -20,13 +21,30 @@ require '../server/db.php';
     <header class="main__header">
       <i class="fas fa-box"></i>
         <div class="main__header-title">
-          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a > / Mis bienes</span>
+          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a > / Mis bienes retirados</span>
           <h2>Mis bienes desincorporados</h2>
         </div>
     </header>
     <main class="main">
         <?php include 'assets/include/filters.php' ?>
         <section class="myEstates">
+        <div class="myEstates__header">
+            <div class="myEstates__header-title">
+              <img src="assets/logo-contraloria.jpg" class="myEstates__header-logo" alt="">
+              <div class="myEstates__header-data">
+                <b>Contraloria municipal de Guanipa</b>
+                <span>Sistema de solicitud y gestion de bienes</span>
+              </div>
+            </div>
+            <div class="myEstates__header-info">
+              <h4>Mis bienes desincorporados</h4>
+              <span class="myEstates__header-total">Total: <?php
+              $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate != '0000-00-00' AND responsible =".$_SESSION['user_id']);
+              $row = $query->fetch(PDO::FETCH_ASSOC);
+              echo $row['total'];
+              ?></span>
+            </div>
+          </div>
           <?php
             $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate != '0000-00-00' AND responsible =".$_SESSION['user_id']);
             $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -50,7 +68,6 @@ require '../server/db.php';
                 <th>Fecha Solicitud</th>
                 <th>Fecha Aprobación</th>
                 <th>Fecha de retiro</th>
-                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +75,7 @@ require '../server/db.php';
               <?php
               foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate != "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row):
               ?>
-              <tr class="table-dates">
+              <tr class="table-dates estate__item">
                 <td><?php echo htmlspecialchars($row['id']); ?></td>
                 <td><?php echo htmlspecialchars($row['name']); ?></td>
                 <td><?php echo htmlspecialchars($row['description']); ?></td>
@@ -66,10 +83,6 @@ require '../server/db.php';
                 <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['withdrawalDate']); ?></td>
-                <td>
-                  <a href=".php?id=<?php echo $row['id']; ?>">Editar</a>
-                  <a href="retiro-bien.php?id=<?php echo $row['id']; ?>">Eliminar</a>
-                </td>
               </tr>
               <?php
               endforeach;?>

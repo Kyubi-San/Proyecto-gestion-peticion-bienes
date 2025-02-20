@@ -25,13 +25,30 @@ require '../server/db.php';
     <header class="main__header">
       <i class="fas fa-box"></i>
         <div class="main__header-title">
-          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre" onclick="deployItem(bienesItem, 0)">Bienes</a> / Lista de bienes</span>
+          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a> / Lista de bienes</span>
           <h2>Lista de todos los bienes</h2>
         </div>
     </header>
     <main class="main">
         <?php include 'assets/include/filters.php'; ?>
         <section class="myEstates">
+        <div class="myEstates__header">
+            <div class="myEstates__header-title">
+              <img src="assets/logo-contraloria.jpg" class="myEstates__header-logo" alt="">
+              <div class="myEstates__header-data">
+                <b>Contraloria municipal de Guanipa</b>
+                <span>Sistema de solicitud y gestion de bienes</span>
+              </div>
+            </div>
+            <div class="myEstates__header-info">
+              <h4>Todos los Bienes</h4>
+              <span class="myEstates__header-total">Total: <?php
+              $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate = '0000-00-00'");
+              $row = $query->fetch(PDO::FETCH_ASSOC);
+              echo $row['total'];
+              ?></span>
+            </div>
+          </div>
           <?php
             $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE responsible =".$_SESSION['user_id']);
             $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -54,13 +71,13 @@ require '../server/db.php';
                 <th>Tipo de Bien</th>
                 <th>Fecha Solicitud</th>
                 <th>Fecha Aprobación</th>
-                <th>Acciones</th>
+                <th class="table-actions">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from bienes INNER JOIN usuario ON bienes.responsible = usuario.n_dependencia') as $row):
+              foreach ($conn->query('SELECT * from bienes INNER JOIN usuario ON bienes.responsible = usuario.n_dependencia WHERE withdrawalDate = "0000-00-00"') as $row):
               ?>
               <tr class="table-dates estate__item">
                 <td><?php echo htmlspecialchars($row['id']); ?></td>
@@ -70,9 +87,8 @@ require '../server/db.php';
                 <td><?php echo htmlspecialchars($row['type']); ?></td>
                 <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
-                <td>
-                  <a href="edit.php?id=<?php echo $row['id']; ?>">Editar</a>
-                  <a href="delete.php?id=<?php echo $row['id']; ?>">Eliminar</a>
+                <td class="table-actions">
+                  <a href="solicitud-desincorporacion.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-trash table__icon--delete"></i></a>
                 </td>
               </tr>
               <?php

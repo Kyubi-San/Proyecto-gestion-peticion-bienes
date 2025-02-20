@@ -41,8 +41,7 @@ body {
     justify-content: center;
 }
 
-.main h1 {
-    text-align: center;
+.main h2 {
     color: #2d3436;
 }
 
@@ -90,6 +89,15 @@ body {
     outline:none;
     border: 1px solid #ccc;
     color: #2c3e50;
+}
+
+select.form__input, input[type="date"] {
+    cursor: pointer;
+}
+
+span.form__input {
+    font-size: 15px;
+    user-select: none;
 }
 
 input:disabled, select:disabled {

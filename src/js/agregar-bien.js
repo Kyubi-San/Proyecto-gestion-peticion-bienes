@@ -11,12 +11,6 @@ function validarCampos() {
   return pass == 7 ? true : false
 }
 
-function clearInputs() {
-  formInput.forEach(input => {
-    input.value= ""
-  });
-}
-
 form.addEventListener('submit', (e) =>{
     e.preventDefault();
     if (validarCampos()) {
@@ -43,7 +37,7 @@ form.addEventListener('submit', (e) =>{
               timer: 1500
             });
           }
-          form.submit()
+          form.reset()
         }
       });
     }    

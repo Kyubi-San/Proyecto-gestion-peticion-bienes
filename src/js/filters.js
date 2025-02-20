@@ -5,6 +5,68 @@ const filterCancelButton = document.getElementById("filter-cancel-button")
 const filterInput = document.querySelectorAll(".filters__input")
 const tableDates = document.querySelectorAll(".table-dates")
 
+// Funcion para filtrar segun los rangos de fecha
+
+const dateRange = document.getElementById("dateRange")
+const dateRangeInput = document.querySelectorAll(".dateRange__input")
+
+function filterDateRange(range) {
+    let currentDate = new Date()
+    let currentDay = currentDate.getDate()
+    let currentMonth = currentDate.getMonth() + 1
+    let currentYear = currentDate.getFullYear()
+    let currentWeekDay = currentDate.getDay()
+
+    currentDate.setDate(currentDate.getDate() - currentWeekDay)
+    let diaSemanaActual = currentDate.getDate();
+    let mesSemanaActual = currentDate.getMonth() + 1;
+
+    for (let i = 0; i < tableDates.length; i++) {
+        let requestDateCell = tableDates[i].getElementsByTagName('td')[5].innerText.toLowerCase();
+        requestDateCell = requestDateCell.split("-")
+        
+        switch (range) {
+            case 0:
+                if(requestDateCell[2] == currentDay && requestDateCell[1] == currentMonth && requestDateCell[0] == currentYear) {
+                    tableDates[i].style.display = '';
+                } else {
+                    tableDates[i].style.display = 'none';
+                }
+                break;
+            
+            case 1: 
+                console.log(mesSemanaActual)
+                if(requestDateCell[2] >= diaSemanaActual && requestDateCell[1] >= mesSemanaActual) {
+                    tableDates[i].style.display = '';
+                } else {
+                    tableDates[i].style.display = 'none';
+                }
+                break;
+
+            case 2:
+                if(requestDateCell[0].includes(currentYear) && requestDateCell[1] == currentMonth) {
+                    tableDates[i].style.display = '';
+                } else {
+                    tableDates[i].style.display = 'none';
+                }
+                break;
+            
+            case 3:
+                    tableDates[i].style.display = '';
+                break;
+        
+            default:
+                break;
+        }
+    }
+}
+
+filterMenu.addEventListener("submit", (e) => {
+    e.preventDefault()
+    aplicarFiltros()
+    console.log(dateRange.value)
+})
+
 filterMenuButton.addEventListener("click", () => {
     filterMenu.classList.toggle("visible--flex")
 })
@@ -35,6 +97,8 @@ function guardarDatosFiltro() {
     return filtrosAplicados;
 }
 
+// Función para aplicar los filtros
+
 function aplicarFiltros() {
     const filtros = guardarDatosFiltro();
 
@@ -51,13 +115,5 @@ function aplicarFiltros() {
            tableDates[i].style.display = 'none';
         }
     }
-}
-
-function clearFilters() {
-    filterInput.forEach(filter => {
-        if (filter.value != "") {
-            filter.value = ""
-        }
-    });
 }
 

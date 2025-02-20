@@ -39,6 +39,7 @@ body {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .main__header {
@@ -189,10 +190,68 @@ body {
     background: #2980b9;
 }
 
+.nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1em;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bdc3c7;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.nav__item {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0;
+    gap: 1em;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid #ddd;
+    transition: .3s all;
+    border-radius: 10px;
+}
+
+.nav__item:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 12px 36px;
+}
+
+.nav__item-icon {
+    padding: .8em;
+    background: white;
+    border-radius: 50%;
+    color: #3498db;
+    font-size: 1.3em;
+    position: absolute;
+    z-index: 100;
+    transform: translateY(-30px);
+    border: 1px solid #ddd;
+
+}
+
+.nav__item-textBox {
+    color: #2d3436;
+    font-size: 13px;
+    position: relative;
+    margin: 28px 0;
+    align-self: flex-end;
+    width: 100%;
+    font-weight: bold;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     cursor: pointer;
+    max-height: 80px;
 }
 
 th, td {
@@ -211,6 +270,7 @@ th {
 tr {
     background: #ecf0f1;
     color: #34495e;
+    transition: .3s background;
 }
 
 tr:nth-child(even) {
@@ -237,7 +297,6 @@ tr:hover {
     border: 1px solid #ddd;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     position: relative;
-    overflow: hidden;
     margin: 2em 0;
     display: flex;
     flex-direction: column;

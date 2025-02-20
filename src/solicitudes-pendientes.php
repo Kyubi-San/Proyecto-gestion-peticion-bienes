@@ -32,6 +32,23 @@ require '../server/db.php';
     <main class="main">
         <?php include 'assets/include/filters.php'?>
         <section class="myEstates">
+        <div class="myEstates__header">
+            <div class="myEstates__header-title">
+              <img src="assets/logo-contraloria.jpg" class="myEstates__header-logo" alt="">
+              <div class="myEstates__header-data">
+                <b>Contraloria municipal de Guanipa</b>
+                <span>Sistema de solicitud y gestion de bienes</span>
+              </div>
+            </div>
+            <div class="myEstates__header-info">
+              <h4>Solicitudes pendientes</h4>
+              <span class="myEstates__header-total">Total: <?php
+              $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes WHERE aprobado = 0");
+              $row = $query->fetch(PDO::FETCH_ASSOC);
+              echo $row['total'];
+              ?></span>
+            </div>
+          </div>
           <?php
             $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes WHERE aprobado = 0");
             $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -54,7 +71,7 @@ require '../server/db.php';
                 <th>Descripción</th>
                 <th>Tipo de Bien</th>
                 <th>Comentarios</th>
-                <th>Acciones</th>
+                <th class="table-actions">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -70,7 +87,7 @@ require '../server/db.php';
                 <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
                 <td><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
                 <td><?php echo htmlspecialchars($row['comentario']); ?></td>
-                <td>
+                <td class="table-actions">
                   <a href="gestion-solicitudes.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--check" title="Aprobar"><i class="fa-solid fa-check"></i></a>
                   /
                   <a href="rechazar-solicitud.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--decline" title="Rechazar"><i class="fa-solid fa-xmark"></i></a>

@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
   header('Location: login.php');
 }
 
+// Se genera el id que sera usado al insertar el bien
+
 function generateID($length = 10) {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $charactersLength = strlen($characters);
@@ -16,8 +18,9 @@ function generateID($length = 10) {
   }
   return $randomString;
 }
-
 $uuid = generateID(10);
+
+// Seleccionar la solicitud que tenga el mismo id que la variable $_GET["id"] traida desde el navegador
 
 $query = $conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE n_solicitud ='.$_GET["id"]);
 $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -36,10 +39,7 @@ if ($approbed == 1) {
   header('Location: login.php');
 }
 
-
 if ($_POST) {
-
-// Asignar valores a las variables desde $_POST
     
     # Esquema de la tabla
   
@@ -54,6 +54,7 @@ if ($_POST) {
       $stmt->bindParam(':description', $description); 
       $stmt->bindParam(':responsable', $responsable);  
       $stmt2->bindParam(':id', $id);
+      
       try {
         $stmt->execute();
         $stmt2->execute();
@@ -97,11 +98,13 @@ if ($_POST) {
         </div>
         <div class="form-group">
           <label for="">Nombre del bien:</label>
-          <input type="text" class="form__input" value="<?php echo $name;?>" name="name" id="newName" placeholder="Nombre del bien"/>
+          <span class="form__input"><?php echo $name;?></span>
+          <input type="hidden" value="<?php echo $name;?>" name="name">
         </div>
         <div class="form-group">
           <label for="">Descripcion:</label>
-          <input type="text" class="form__input" value="<?php echo $description;?>" name="description" id="newDescription" placeholder="Descripción"/>
+          <span class="form__input"><?php echo $description;?></span>
+          <input type="hidden" name="description" value="<?php echo $description;?>">
         </div>
         
         <div class="form-group">
@@ -118,12 +121,14 @@ if ($_POST) {
         </div>
         <div class="form-group">
           <label for="newType">Comentario:</label>
-          <input type="text" class="form__input" value="<?php echo $comments;?>" id="comments" placeholder="Comentarios" name="comments"/>
+          <span class="form__input"><?php echo $comments;?></span>
+          <input type="hidden" name="comments" value="<?php echo $comments;?>">
         </div>
     
         <div class="form-group">
             <label for="requestDate">Fecha de Solicitud:</label>
-            <input type="date" class="form__input" value="<?php echo $requestDate;?>" name="requestDate" id="requestDate" />
+            <span class="form__input"><?php echo $requestDate;?></span>
+            <input type="hidden" name="requestDate">
         </div>
         <div class="form-group--button">
           <a href="solicitudes-pendientes.php" class="form-button">Volver</a>

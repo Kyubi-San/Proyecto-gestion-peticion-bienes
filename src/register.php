@@ -3,9 +3,7 @@
 require 'assets/include/session_start.php';
 require '../server/db.php';
 
-if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
-  header('Location: login.php');
-}
+
 
 $message = "";
 
@@ -20,7 +18,6 @@ if ($_POST) {
     $cedula = $_POST['cedula'];
     $nombre = htmlspecialchars($_POST['nombre']);
     $apellido = htmlspecialchars($_POST['apellido']);
-    $telefono = htmlspecialchars($_POST['telefono']);
 
     $pregunta1 = $_POST['pregunta1'];
     $pregunta2 = $_POST['pregunta2'];
@@ -46,14 +43,13 @@ if ($_POST) {
 
     // Variables para insertar los datos en la db si todo sale bien
 
-      $stmt = $conn->prepare("INSERT INTO usuario (nombre_dependencia, username, correo, contrasena, nombre, apellido, telefono, cedula) VALUES (:dependencia, :user, :email, :password, :nombre, :apellido, :telefono, :cedula)");
+      $stmt = $conn->prepare("INSERT INTO usuario (nombre_dependencia, username, correo, contrasena, nombre, apellido, cedula) VALUES (:dependencia, :user, :email, :password, :nombre, :apellido, :cedula)");
 
       $stmt->bindParam(':dependencia', $dependencia);
       $stmt->bindParam(':user', $username);
       $stmt->bindParam(':email', $email);
       $stmt->bindParam(':nombre', $nombre);
       $stmt->bindParam(':apellido', $apellido);
-      $stmt->bindParam(':telefono', $telefono);
       $stmt->bindParam(':cedula', $cedula);
       $password = password_hash($contrasena, PASSWORD_BCRYPT);
       $stmt->bindParam(':password', $password);
@@ -127,8 +123,6 @@ if ($_POST) {
                     <input type="text" class="login-input2" name="nombre" placeholder="Nombre" hidden>
                     <span class="login-input-error2"></span>
                     <input type="text" class="login-input2" name="apellido" placeholder="Apellido" hidden>
-                    <span class="login-input-error2"></span>
-                    <input type="number" class="login-input2" name="telefono" placeholder="Telefono" hidden>
                     <span class="login-input-error2"></span>
 
                     <select name="pregunta1" class="login-input3" hidden>

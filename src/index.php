@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id'])) {
             <header class="main__header">
                 <div class="greeting">
                     <div>
-                        <h2>Bienvenido <?php echo $records['nombre']?></h2>
+                        <h2>Bienvenido <?php echo $records['admin'] > 0 ? 'Administrador ' : 'Usuario '; echo $records['username']?></h2>
                     </div>
                 </div>
 
@@ -98,6 +98,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </section>
+            <?php if ($records["admin"] > 0): ?>
             <section class="card">
                 <div class="card__header">
                     <h3>Ultimas solicitudes</h3>
@@ -158,6 +159,38 @@ if (!isset($_SESSION['user_id'])) {
                     </footer>' : ''?>                      
                 </div>
             </section>
+            <?php else: ?>
+                        <nav class="nav">
+                <a class="nav__item">
+                        <i class="fa-solid fa-box nav__item-icon"></i>
+                        <span class="nav__item-textBox">Mis bienes</span>
+                </a>
+                <a class="nav__item">
+                        <i class="fa-solid fa-box nav__item-icon"></i>
+                        <span class="nav__item-textBox">Mis bienes retirados</span>
+                </a>
+                <a class="nav__item">
+                        <i class="fas fa-file-alt nav__item-icon"></i>
+                        <span class="nav__item-textBox">Mis solicitudes</span>
+                </a>
+                <a class="nav__item">
+                        <i class="fas fa-file-alt nav__item-icon"></i>
+                        <span class="nav__item-textBox">Solicitar bien</span>
+                </a>
+                <a class="nav__item">
+                    <i class="fas fa-file-alt nav__item-icon"></i>
+                    <span class="nav__item-textBox">Solicitar retiro</span>
+                </a>
+                <a class="nav__item">
+                    <i class="fas fa-user nav__item-icon"></i>
+                    <span class="nav__item-textBox">Configuracion de la cuenta</span>
+                </a>
+                <a class="nav__item">
+                    <i class="fas fa-user nav__item-icon"></i>
+                    <span class="nav__item-textBox">Preguntas de seguridad</span>
+                </a>
+            </nav>
+            <?php endif; ?>
         </main>
     </div>
 </body>

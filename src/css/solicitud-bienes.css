@@ -76,8 +76,9 @@ label {
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
     height: 50px;
+    margin-bottom: 10px;
+    outline: none;
 }
 
 .button__group {
@@ -142,51 +143,27 @@ label {
     color: #3498db;
 }
 
-input[type="text"], input[type="date"], input[type="password"], textarea, select {
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    cursor: pointer;
 }
 
 textarea {
+    cursor: text;
     resize: none;
-    width: 100%; /* Ajusta el ancho según sea necesario */
-    height: 100px; /* Ajusta la altura según sea necesario */
-    padding: 10px; /* Espaciado interno */
-    font-size: 14px; /* Tamaño de la fuente */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 4px; /* Bordes redondeados */
-}
-
-.tipo {
-    width: 40%;
-}
-
-#description {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    height: 50px;
-    padding: .5em;
-    margin-bottom: 1em;
-}
-
-#description input[type="text"] {
-    padding: 5px;
-    margin-bottom: 0px;
+    border-radius: 4px;
     outline: none;
-    border: none;
-    border-bottom: 1px solid #636e72;
-    border-radius: 0px;
-}
-
-#description span {
-    background: #dfe6e9;
-    padding: 5px;
 }
 
 .tipo {
@@ -241,3 +218,8 @@ textarea {
     user-select: none;
 }
 
+#tipo_bien {
+    max-height: 100px; /* Ajusta la altura según tus necesidades */
+    overflow-y: auto;
+    display: block;
+}

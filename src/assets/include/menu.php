@@ -204,16 +204,16 @@ function isActive($page) {
                 <?php endif; ?>
             </div>
         <h3>Configuracion</h3>
-            <a href="#" id="menu-user" class="menu__item menu__item--selectable">
+            <div id="menu-user" class="menu__item menu__item--selectable">
                 <div>
                     <i class="fas fa-user"></i>
                     <span>Usuarios</span>
                 </div>
                 <i class="fa-solid fa-chevron-right menu__item-iconDeploy"></i>
-            </a>
+                </div>
             <div class="menu__options menu__item-user">
-                <a href="register.php" class="menu__options-item">
-                    <span>Datos Personales</span>
+                <a href="personal.php#menu-user" class="menu__options-item <?php echo isActive('personal.php');?>">
+                    <span>Configuracion de la cuenta</span>
                 </a>
                 <a href="preguntas-seguridad.php#menu-user" class="menu__options-item <?php echo isActive('preguntas-seguridad.php');?>">
                     <span>Preguntas de seguridad</span>

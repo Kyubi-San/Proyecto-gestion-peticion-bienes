@@ -7,6 +7,41 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
 }
 
+if ($_GET) {
+
+    $id = $_GET['id'];
+
+    if ($records['admin'] > 0) {
+        $stmt = $conn->prepare("SELECT * FROM bienes WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM bienes WHERE id = :id AND responsible =".$_SESSION['user_id']);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    }
+
+    try { 
+        $stmt->execute();
+    
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = array();
+    
+        if ($row) {
+            $data[] = $row;  
+            $results = '<div class="result__content"><label for="" class="placeholder--category">ID</label><span class="result__content-text">'.htmlspecialchars($row["id"]).'</span></div>
+            <div class="result__content"><label for="" class="placeholder--category">Descripcion</label><span class="result__content-text">'.htmlspecialchars($row["description"]).'</span></div>
+            <div class="result__content"><label for="" class="placeholder--category">Comentario</label><span class="result__content-text">'.htmlspecialchars($row["comments"]).'</span></div>
+            <div class="result__content"><label for="" class="placeholder--category">Fecha de solicitud</label><span class="result__content-text">'.htmlspecialchars($row["requestDate"]).'</span></div>
+            <div class="result__content"><label for="" class="placeholder--category">Fecha de aprobacion</label><span class="result__content-text">'.htmlspecialchars($row["approvalDate"]).'</span></div>';
+        } else {
+            $data = array("message" => "Bienes no encontrados");
+            $results="Error: Bienes no encontrados";
+        }
+        
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
 if ($_POST) {
     
     $currentDate = date('Y-m-d');
@@ -33,7 +68,7 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud De Bienes</title>
+    <title>Solicitud de retiro</title>
     <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/solicitud-bienes.css">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
@@ -52,9 +87,13 @@ if ($_POST) {
                 <select id="tipo_bien" class="input" name="tipo_bien" required>
                     <option value="" selected disabled>Selecciona uno de tus bienes</option>
                     <?php
-                        foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row) { 
-                            echo '<option value='.$row['id'].'>'.$row['name'].'</option>';
-                            $id = $row['id'];
+                        if ($_GET) {
+                            echo '<option selected value='.$row['id'].'>'.$row['name'].'</option>';
+                        } else {
+                            foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row) { 
+                                echo '<option value='.$row['id'].'>'.$row['name'].' ('.$row["id"].')</option>';
+                                $id = $row['id'];
+                            }
                         }
                     ?>
                 </select>
@@ -62,7 +101,9 @@ if ($_POST) {
             </div>
 
             <div id="result">
-                
+                <?php if ($_GET) {
+                    echo $results; 
+                } ?>
             </div>
             
             <div class="input-container">

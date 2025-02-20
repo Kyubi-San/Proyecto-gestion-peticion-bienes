@@ -24,12 +24,11 @@ if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
     <div class="container">
         <?php include 'assets/include/menu.php';?>
         <main class="main">
-        <form action="../server/routes/agregar-bien.php" id="form" class="form" method="POST">
+            <form action="../server/routes/agregar-bien.php" id="form" class="form" method="POST">
             <h2>Agregar Bien</h2>
 
             <div class="form-group">
                 <div>
-                    <label for="newType">Titulo:</label>
                     <input type="text" class="form__input" name="name" placeholder="Nombre del bien" />
                 </div>
                 <div>
