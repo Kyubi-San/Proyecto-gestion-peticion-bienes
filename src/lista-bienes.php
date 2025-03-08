@@ -61,31 +61,31 @@ require '../server/db.php';
               </div>';
             }
           ?>
-          <table id="goodsTable">
+          <table id="miTabla">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Responsable</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Tipo de Bien</th>
-                <th>Fecha Solicitud</th>
-                <th>Fecha Aprobación</th>
+                <th id="order-id">ID</th>
+                <th id="order-responsible">Responsable</th>
+                <th id="order-name">Nombre</th>
+                <th id="order-description">Descripción</th>
+                <th id="order-type">Tipo de Bien</th>
+                <th id="order-requestDate">Fecha Solicitud</th>
+                <th id="order-approvalDate">Fecha Aprobación</th>
                 <th class="table-actions">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from bienes INNER JOIN usuario ON bienes.responsible = usuario.n_dependencia WHERE withdrawalDate = "0000-00-00"') as $row):
+              foreach ($conn->query('SELECT * from bienes INNER JOIN usuario ON bienes.responsible = usuario.n_dependencia WHERE withdrawalDate = "0000-00-00" ORDER BY name') as $row):
               ?>
               <tr class="table-dates estate__item">
-                <td><?php echo htmlspecialchars($row['id']); ?></td>
+                <td class="estates-id"><?php echo htmlspecialchars($row['id']); ?></td>
                 <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                <td><?php echo htmlspecialchars($row['name']); ?></td>
-                <td><?php echo htmlspecialchars($row['description']); ?></td>
-                <td><?php echo htmlspecialchars($row['type']); ?></td>
-                <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['name']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['description']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['type']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
                 <td class="table-actions">
                   <a href="solicitud-desincorporacion.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-trash table__icon--delete"></i></a>

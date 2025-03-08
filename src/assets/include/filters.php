@@ -26,7 +26,7 @@
             <option value="Electronico">Electrónico</option>
             <option value="Mueble">Mueble</option>
             <option value="Herramienta">Herramienta</option>
-            <option value="Consumible">Consumible</option>
+            <option value="Otro">Otro...</option>
         </select>
       </div>
     </div>
@@ -61,5 +61,6 @@
       <span class="filters__menu-footer-button" id="filter-cancel-button">Cancelar</span>
       <button class="filters__menu-footer-button filters__menu-footer-button--apply">Aplicar</button>
     </footer>
-</form>
-  </div>
+  </form>
+</div>
+

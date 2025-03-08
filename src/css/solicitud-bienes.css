@@ -223,3 +223,9 @@ textarea {
     overflow-y: auto;
     display: block;
 }
+
+.message-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

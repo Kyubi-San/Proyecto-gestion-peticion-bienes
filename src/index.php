@@ -6,8 +6,10 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
 }
 
-?>
+    $query = $conn->query('SELECT COUNT(*) as total FROM notificaciones WHERE receiver ='.$_SESSION['user_id']);
+    $row = $query->fetch(PDO::FETCH_ASSOC);
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,12 +33,21 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
 
                 <div class="notification">
-                    <i class="fa-regular fa-bell"></i>
-                    <div class="notification__menu">
-                        <a href="#" class="notification__menu-item">
-                            <i class="fa-solid fa-ghost"></i>
-                            No tienes notificaciones por ahora
-                        </a>
+                    <i class="fa-regular fa-bell" id="notification-button"></i>
+                    <div class="notification__menu" id="notification-menu">                        
+                        <?php 
+
+                        if ($row['total'] != 0) {
+                            foreach ($conn->query('SELECT * from notificaciones WHERE receiver ='.$_SESSION['user_id'].' ORDER BY id DESC') as $notifications) {
+                                $sender = $conn->prepare('SELECT nombre_dependencia from usuario WHERE n_dependencia ='.$notifications['sender']);
+                                $sender->execute();
+                                $sender = $sender->fetch(PDO::FETCH_ASSOC);
+                                echo "<a href='#' class='notification__menu-item'><i class='fas fa-file-alt'></i><div class='notification__menu-info'><span class='notification__menu-sender'>".$sender['nombre_dependencia']."</span><span class='notification__menu-message'>".$notifications['message']."</span></div></a>";
+                            }
+                        } else {
+                            echo '<span class="notification__menu-item notification__menu-item--empty"><i class="fa-solid fa-ghost"></i>No tienes notificaciones por ahora</span>';
+                        }
+                        ?>
                     </div>
                 </div>
             </header>
@@ -52,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
                             <h3>Bienes</h3>
                             <p>
                                 <?php
-                                $query = $conn->query("SELECT COUNT(*) as total FROM bienes");
+                                $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate = '0000-00-00'");  
                                 $row = $query->fetch(PDO::FETCH_ASSOC);
                                 echo $row['total'];
                                 ?>
@@ -193,5 +204,6 @@ if (!isset($_SESSION['user_id'])) {
             <?php endif; ?>
         </main>
     </div>
+    <script src="js/index.js"></script>
 </body>
 </html>

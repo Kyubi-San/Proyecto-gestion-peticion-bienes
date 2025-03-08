@@ -1,0 +1,174 @@
+:root {
+    --primary-color: #2d3436;
+    --secondary-color: #b2bec3;
+    --tertiary-color: #F9F7F7;
+    --menu-color: #f5f6fa;
+    --menu-color-secondary: #2d3436;
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: black;
+    height: 100vh;
+    font-family: Lato, Helvetica Neue, helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    gap: 1em;
+}
+
+.main__header {
+    display: flex;
+    color: white;
+    width: 85%;
+    padding: 0;
+    margin: 0;
+}
+
+.main__header h1 {
+    color: white;
+    font-weight: lighter;
+    font-size: 28px;
+}
+
+.nav {
+    width: 250px;
+    color: white;
+    margin: 1em;
+}
+
+.nav__list {
+    padding: 0;
+    margin: 0;
+}
+
+.nav__list-item {
+    padding: 1em;
+    color: #a0a0a0;
+}
+
+.nav__list-item:not(:has(h3)) {
+    cursor: pointer;
+}
+
+.nav__list-item:not(:has(h3)):hover {
+    background-color: #2d3436;
+    color: var(--menu-color);
+}
+
+.nav__list-item h3 {
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-weight: lighter;
+    font-size: 1.25rem;
+}
+
+.card {
+    background-color: #23252b;
+    color: white;
+    padding: 2em;
+    margin: 1em;
+    max-height: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+
+.card__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 60%;
+}
+
+.card h2 {
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-weight: lighter;
+    font-size: 2em;
+    text-align: center;
+}
+
+.card__info-text {
+    color: #a0a0a0;
+    width: 100%;
+    line-height: 1.5rem;
+    text-align: center;
+    align-self: center;
+}
+
+.card__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.card__info-label {
+    color: #a0a0a0;
+    font-size: 12px;
+}
+
+.card__info-email {
+    color: white;
+    font-size: 1.1rem;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    padding: .5em 0;
+}
+
+.card__info-text-intructions {
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+
+.card__button {
+    background: #ff640a;
+    padding: 1em;
+    width: 70%;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: center;
+}
+
+.card__button:hover {
+    background: #f0932b;
+}
+
+

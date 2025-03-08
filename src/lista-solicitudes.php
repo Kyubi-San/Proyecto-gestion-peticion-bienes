@@ -77,23 +77,23 @@ require '../server/db.php';
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia') as $row):
+              foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia ORDER BY fecha_solicitud') as $row):
               ?>
-              <tr class="estate__item">
-                <td><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
+              <tr class="table-dates estate__item">
+                <td class="estates-id"><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
                 <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                <td><?php echo htmlspecialchars($row['bien']); ?></td>
-                <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                <td><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['bien']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
                 <td><?php echo htmlspecialchars($row['comentario']); ?></td>
                 <td><?php
                   if ($row["aprobado"] == 1) {
                     echo '<span style="color:#27ae60;">Aprobado</span>';
                   } elseif ($row["aprobado"] == 0) {
-                    echo '<span style="color:#34495e;">Pendiente</span>';
+                    echo '<a href="solicitudes-pendientes.php#menu-request" title="Gestionar solicitudes pendientes" style="color:#34495e;">Pendiente</a">';
                   } else {
-                    echo '<span style="color:#c0392b; text-wrap: nowrap;">Rechazado</span>';
+                    echo '<a href="solicitudes-rechazadas.php#menu-request" title="Motivo de rechazo: '.$row['comentario_admin'].'" style="color:#c0392b; text-wrap: nowrap;">Rechazado</a>';
                   }
                  ?></td>
               </tr>
@@ -104,5 +104,6 @@ require '../server/db.php';
         </section>
       </main>
   </div>
+  <script src="js/filters.js"></script>
 </body>
 </html>

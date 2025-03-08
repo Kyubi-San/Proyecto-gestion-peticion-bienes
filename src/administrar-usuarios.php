@@ -7,7 +7,6 @@ require '../server/db.php';
     header('Location: login.php');
   }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +40,7 @@ require '../server/db.php';
                         </div>
                         <div class="card__actions">
                             <a href="" class="actions__button actions__button--delete">Eliminar Usuario</a>
-                            <a href="#" class="actions__button" onclick="holawenas()">Editar Usuario</a>
+                            <a href='account/email.php?id=<?php echo $row["n_dependencia"]?>' class="actions__button">Informacion de usuario</a>
                         </div>
                     </div>
                 </div>

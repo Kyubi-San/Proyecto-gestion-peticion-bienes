@@ -26,8 +26,7 @@ require '../server/db.php';
         </div>
     </header>
     <main class="main">
-        <input type="text" id="filterId" placeholder="Ingrese ID a filtrar" />
-        <button class="button" onclick="filterById()">Filtrar</button>
+      <?php include 'assets/include/filters.php'?>
         <section class="myEstates">
         <div class="myEstates__header">
             <div class="myEstates__header-title">
@@ -75,12 +74,12 @@ require '../server/db.php';
               <?php
               foreach ($conn->query('SELECT * from solicitudes WHERE id_usuario ='.$_SESSION['user_id']) as $row):
               ?>
-              <tr class="estate__item">
-                <td><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
-                <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                <td><?php echo htmlspecialchars($row['bien']); ?></td>
-                <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                <td><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
+              <tr class="table-dates estate__item">
+                <td class="estates-id"><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['bien']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
                 <td><?php echo htmlspecialchars($row['comentario']); ?></td>
                 <td>
                 <?php
@@ -89,7 +88,7 @@ require '../server/db.php';
                   } elseif ($row["aprobado"] == 0) {
                     echo '<span style="color:#34495e;">Pendiente</span>';
                   } else {
-                    echo '<span style="color:#c0392b; text-wrap: nowrap;">Rechazado</span>';
+                    echo '<span href="solicitudes-rechazadas.php#menu-request" title="Motivo de rechazo: '.$row['comentario_admin'].'" style="color:#c0392b; text-wrap: nowrap;">Rechazado</span>';
                   }
                 ?>
                 </td>
@@ -101,5 +100,6 @@ require '../server/db.php';
         </section>
       </main>
   </div>
+  <script src="js/filters.js"></script>
 </body>
 </html>

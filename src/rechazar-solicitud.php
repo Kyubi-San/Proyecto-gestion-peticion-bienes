@@ -20,24 +20,30 @@ $responsible = $row['nombre_dependencia'];
 $responsable = $row['id_usuario'];
 $approbed = $row['aprobado'];
 
+$sender = $_SESSION['user_id'];
+$message = 'Rechazo tu solicitud de '.$name;
+
 if ($approbed == 1) {
   header('Location: login.php');
 }
-
 
 if ($_POST) {
 
   $commentAdmin = $_POST["commentAdmin"];
 
 // Asignar valores a las variables desde $_POST
-    
-    # Esquema de la tabla
-      $stmt = $conn->prepare("UPDATE solicitudes SET aprobado = '-1', comentario_admin = :commentAdmin WHERE n_solicitud = :id");
-  
-      $stmt->bindParam(':id', $id);
-      $stmt->bindParam(':commentAdmin', $commentAdmin);
+
+  $stmt = $conn->prepare("UPDATE solicitudes SET aprobado = '-1', comentario_admin = :commentAdmin WHERE n_solicitud = :id");  
+  $stmt->bindParam(':id', $id);
+  $stmt->bindParam(':commentAdmin', $commentAdmin);
+  $stmt2 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message) VALUES (:sender, :receiver, 2, :message)');
+  $stmt2->bindParam(':receiver', $responsable);
+  $stmt2->bindParam(':sender', $sender);
+  $stmt2->bindParam(':message', $message);
+
       try {
         $stmt->execute();
+        $stmt2->execute();
         header('Location: solicitudes-rechazadas.php');
   
       } catch (\Throwable $th) {

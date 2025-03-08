@@ -46,10 +46,13 @@ if ($_POST) {
     
     $currentDate = date('Y-m-d');
     $id = $_POST['tipo_bien'];
-  
-  // Asignar valores a las variables desde $_POST
-      
-      # Esquema de la tabla
+    $password = htmlspecialchars($_POST['password']);
+
+    $registro = $conn->prepare("SELECT contrasena FROM usuario WHERE n_dependencia =".$_SESSION['user_id']);
+    $registro->execute();
+    $resultado = $registro->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultado && password_verify($password, $resultado['contrasena'])) {
         $stmt = $conn->prepare("UPDATE bienes SET withdrawalDate = :currentDate WHERE id = :id");
     
         $stmt->bindParam(':id', $id);
@@ -60,6 +63,9 @@ if ($_POST) {
         } catch (\Throwable $th) {
             echo "Error al insertar el bien";
         }
+    } else {
+        $messageError = "Contraseña incorrecta";
+    }
 }
 ?>
 
@@ -90,8 +96,8 @@ if ($_POST) {
                         if ($_GET) {
                             echo '<option selected value='.$row['id'].'>'.$row['name'].'</option>';
                         } else {
-                            foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row) { 
-                                echo '<option value='.$row['id'].'>'.$row['name'].' ('.$row["id"].')</option>';
+                            foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"].' ORDER BY name ASC') as $row) { 
+                                echo '<option value='.$row['id'].'>'.$row['name'].' ('.$row["description"].') ('.$row["id"].')</option>';
                                 $id = $row['id'];
                             }
                         }
@@ -108,8 +114,10 @@ if ($_POST) {
             
             <div class="input-container">
                 <input type="password" class="input" id="password" name="password" placeholder=" " required>
-                <label for="password" class="placeholder">Contraseña:</label>
+                <label for="password" class="placeholder">Contraseña</label>
             </div>
+            
+            <span class="message-error"></span>
             
             <div class="button__group">
                 <a href="index.php" class="input__button input__button--cancel">Cancelar</a>

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById("form")
+    const form = document.getElementById("form")
 
     document.getElementById('tipo_bien').addEventListener('change', function() {
         var selectedValue = this.value;
@@ -20,10 +20,24 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
     });
 
-    const formInput = document.querySelectorAll(".form__input")
+    const messageError = document.querySelector(".message-error")
 
-    form.addEventListener('submit', (e) =>{
-        e.preventDefault();
+    document.getElementById('form').onsubmit = function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+  
+      // Enviar la contraseña al servidor
+      verifyPassword(password);
+  };
+  
+  function verifyPassword(password) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '../server/routes/verify_password.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send('password=' + password);
+      xhr.onload = function() {
+        if (xhr.responseText === 'true') {
+          messageError.innerHTML = '';
           Swal.fire({
             text: "¿Quieres desincorporar este bien?",
             icon: "warning",
@@ -45,5 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
               form.submit() 
             }
           });
-    })
+        } else {
+          messageError.innerHTML = "Contraseña incorrecta";
+        }
+      }
+  }
 });

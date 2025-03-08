@@ -76,11 +76,11 @@ require '../server/db.php';
               foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate != "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row):
               ?>
               <tr class="table-dates estate__item">
-                <td><?php echo htmlspecialchars($row['id']); ?></td>
-                <td><?php echo htmlspecialchars($row['name']); ?></td>
-                <td><?php echo htmlspecialchars($row['description']); ?></td>
-                <td><?php echo htmlspecialchars($row['type']); ?></td>
-                <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
+                <td class="estates-id"><?php echo htmlspecialchars($row['id']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['name']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['description']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['type']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['withdrawalDate']); ?></td>
               </tr>

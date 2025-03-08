@@ -53,41 +53,94 @@ body {
     color: #2c3e50;
 }
 
+/* Notificaciones */
+
 .notification {
     font-size: 20px;
     margin: 1em;
-    width: 30%;
+    width: 35%;
     position: relative;
     text-align: right;
 }
 
 .notification > i {
     cursor: pointer;
+    padding: .5em;
+    border-radius: 50%;
+    transition: .3s all;
+    background: whitesmoke;
 }
 
 .notification__menu {
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
-    background: #0984e3;
-    align-items: start;
-    border-radius: 10px;
+    background: whitesmoke;
+    border-radius: 5px;
+    z-index: 1000;
+    gap: .5em;
+    padding: 5px;
+    border: 1px solid #bdc3c7;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    user-select: none;
 }
 
-.notification__menu:hover i {
+.notification__menu--visible {
+    display: flex;
+}
+
+.notification__menu:hover .fa-ghost {
     animation: 2s linear 0s infinite alternate bounce;
 }
 
 .notification__menu-item {
     padding: .8em;
     font-size: 16px;
-    text-decoration: none;
+    color: black;
+    display: flex;
+    width: 100%;
+    gap: 1em;
+    text-align: start;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.notification__menu-info {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.notification__menu-sender {
+    color: black;
+}
+
+.notification__menu-message {
+    font-size: .9rem;
+    color: #34495e;
+}
+
+.notification__menu .fa-file-alt {
+    color: #2c3e50;
+}
+
+.notification__menu-item:hover {
+    background: #dfe6e9;
+}
+
+.notification__menu-item--empty {
+    padding: .8em;
+    background: #0984e3;
+    font-size: 16px;
     color: #ecf0f1;
     border-radius: 10px;
     display: flex;
     gap: .8em;
+    display: flex;
 }
+
+/* Estadisticas de bienes, solicitudes y dependencias */
 
 .main__stats {
     display: grid;

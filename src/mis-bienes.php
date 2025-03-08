@@ -72,14 +72,14 @@ require '../server/db.php';
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"]) as $row):
+              foreach ($conn->query('SELECT * from bienes WHERE withdrawalDate = "0000-00-00" AND responsible ='.$_SESSION["user_id"].' ORDER BY name') as $row):
               ?>
               <tr class="table-dates estate__item">
-                <td><?php echo htmlspecialchars($row['id']); ?></td>
-                <td><?php echo htmlspecialchars($row['name']); ?></td>
-                <td><?php echo htmlspecialchars($row['description']); ?></td>
-                <td><?php echo htmlspecialchars($row['type']); ?></td>
-                <td><?php echo htmlspecialchars($row['requestDate']); ?></td>
+                <td class="estates-id"><?php echo htmlspecialchars($row['id']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['name']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['description']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['type']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['requestDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
                 <td class="table-actions">
                   <a href="solicitud-desincorporacion.php?id=<?php echo $row['id'];?>" title='Eliminar'><i class="fa-solid fa-trash table__icon--delete"></i></a>

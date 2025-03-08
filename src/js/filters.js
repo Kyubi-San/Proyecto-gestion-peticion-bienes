@@ -35,7 +35,6 @@ function filterDateRange(range) {
                 break;
             
             case 1: 
-                console.log(mesSemanaActual)
                 if(requestDateCell[2] >= diaSemanaActual && requestDateCell[1] >= mesSemanaActual) {
                     tableDates[i].style.display = '';
                 } else {
@@ -64,7 +63,6 @@ function filterDateRange(range) {
 filterMenu.addEventListener("submit", (e) => {
     e.preventDefault()
     aplicarFiltros()
-    console.log(dateRange.value)
 })
 
 filterMenuButton.addEventListener("click", () => {
@@ -97,19 +95,20 @@ function guardarDatosFiltro() {
     return filtrosAplicados;
 }
 
+
 // Función para aplicar los filtros
 
 function aplicarFiltros() {
     const filtros = guardarDatosFiltro();
 
     for (let i = 0; i < tableDates.length; i++) {
-        const idCell = tableDates[i].getElementsByTagName('td')[0].innerText.toLowerCase();
-        const nameCell = tableDates[i].getElementsByTagName('td')[1].innerText.toLowerCase();
-        const typeCell = tableDates[i].getElementsByTagName('td')[3].innerText.toLowerCase();
-        const requestDateCell = tableDates[i].getElementsByTagName('td')[4].innerText.toLowerCase();
+        const estateID = document.querySelectorAll(".estates-id")[i].innerText.toLowerCase()
+        const estateName = document.querySelectorAll(".estates-name")[i].innerText.toLowerCase()
+        const estateType = document.querySelectorAll(".estates-type")[i].innerText.toLowerCase()
+        const estateRequestDate = document.querySelectorAll(".estates-request")[i].innerText.toLowerCase()
         const approvalDateCell = tableDates[i].getElementsByTagName('td')[5].innerText.toLowerCase();
         
-        if (idCell.includes(filtros[0]) && nameCell.includes(filtros[1]) && typeCell.includes(filtros[2]) && requestDateCell.includes(filtros[3]) && approvalDateCell.includes(filtros[4])) {
+        if (estateID.includes(filtros[0]) && estateName.includes(filtros[1]) && estateType.includes(filtros[2]) && estateRequestDate.includes(filtros[3]) && approvalDateCell.includes(filtros[4])) {
            tableDates[i].style.display = '';
         } else {
            tableDates[i].style.display = 'none';

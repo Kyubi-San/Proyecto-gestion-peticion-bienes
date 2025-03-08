@@ -79,13 +79,13 @@ require '../server/db.php';
               <?php
               foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE aprobado = 0') as $row):
               ?>
-              <tr class="estate__item">
-                <td><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
+              <tr class="table-dates estate__item">
+                <td class="estates-id"><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
                 <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                <td><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                <td><?php echo htmlspecialchars($row['bien']); ?></td>
-                <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                <td><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['bien']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
                 <td><?php echo htmlspecialchars($row['comentario']); ?></td>
                 <td class="table-actions">
                   <a href="gestion-solicitudes.php?id=<?php echo $row['n_solicitud']?>" class="table__icon--check" title="Aprobar"><i class="fa-solid fa-check"></i></a>
@@ -100,5 +100,6 @@ require '../server/db.php';
         </section>
       </main>
   </div>
+  <script src="js/filters.js"></script>
 </body>
 </html>
