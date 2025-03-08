@@ -21,7 +21,7 @@ Proyecto de gestion y peticion de bienes fisicos para las dependencias dentro de
 5. **Importar la base de datos (si aplica)**:
    - Abre phpMyAdmin en `http://localhost/phpmyadmin/`.
    - Crea una nueva base de datos.
-   - Importa el archivo SQL proporcionado en server/contraloria_db la nueva base de datos.
+   - Importa el archivo SQL proporcionado en `server/contraloria_db` la nueva base de datos.
 
 ## Contacto
 Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarme en [atam2005gm@gmail.com].
