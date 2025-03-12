@@ -3,8 +3,6 @@
 require 'assets/include/session_start.php';
 require '../server/db.php';
 
-
-
 $message = "";
 
 if ($_POST) {
@@ -111,7 +109,7 @@ if ($_POST) {
                     <span class="login-input-error"></span>
                     <input type="text" class="login-input" name="usuario" placeholder="Usuario">
                     <span class="login-input-error"></span>
-                    <input type="password" class="login-input" minlength="8" id="password" name="contrasena" placeholder="Contraseña">
+                    <input type="password" class="login-input" minlength="8" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$" id="password" name="contrasena" placeholder="Contraseña">
                     <span class="login-input-error"></span>
                     <input type="password" class="login-input" minlength="8" id="confirm-password" name="confirmacioncontrasena" placeholder="Confirmar contraseña">
                     <span class="login-input-error" id="confirm-password-error"></span>
