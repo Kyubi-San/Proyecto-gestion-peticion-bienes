@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
 
                 <div class="notification">
-                    <i class="fa-regular fa-bell" id="notification-button"></i>
+                    <i data-count="<?php echo $row['total'] ?>" class="fa-regular fa-bell" id="notification-button"></i>
                     <div class="notification__menu" id="notification-menu">                        
                         <?php 
 
@@ -172,15 +172,15 @@ if (!isset($_SESSION['user_id'])) {
             </section>
             <?php else: ?>
                         <nav class="nav">
-                <a class="nav__item">
+                <a class="nav__item" href="mis-bienes.php#menu-estate">
                         <i class="fa-solid fa-box nav__item-icon"></i>
                         <span class="nav__item-textBox">Mis bienes</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="bienes-desincorporados.php#menu-estate">
                         <i class="fa-solid fa-box nav__item-icon"></i>
                         <span class="nav__item-textBox">Mis bienes retirados</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="mis-solicitudes.php#menu-request">
                         <i class="fas fa-file-alt nav__item-icon"></i>
                         <span class="nav__item-textBox">Mis solicitudes</span>
                 </a>

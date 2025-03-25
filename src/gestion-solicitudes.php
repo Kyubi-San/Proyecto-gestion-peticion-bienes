@@ -45,6 +45,7 @@ if ($_POST) {
   
       $stmt = $conn->prepare("INSERT INTO bienes (id, name, description, type, requestDate, comments, responsible) VALUES (:uuid, :name, :description, :type, :requestDate, :comments, :responsable)");
       $stmt2 = $conn->prepare("UPDATE solicitudes SET aprobado = '1' WHERE n_solicitud = :id");
+      $stmt3 = $conn->prepare("DELETE FROM notificaciones WHERE id_solicitud = :id");
   
       $stmt->bindParam(':uuid', $uuid);
       $stmt->bindParam(':requestDate', $requestDate);
@@ -53,11 +54,15 @@ if ($_POST) {
       $stmt->bindParam(':type', $type);
       $stmt->bindParam(':description', $description); 
       $stmt->bindParam(':responsable', $responsable);  
+
       $stmt2->bindParam(':id', $id);
+
+      $stmt3->bindParam(':id', $id);
       
       try {
         $stmt->execute();
         $stmt2->execute();
+        $stmt3->execute();
         header('Location: lista-bienes.php');
   
       } catch (\Throwable $th) {

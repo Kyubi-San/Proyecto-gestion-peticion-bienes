@@ -32,15 +32,16 @@ if ($_POST) {
             $stmt->bindParam(':descripcion', $descripcion);
             $stmt->bindParam(':comentario', $comentario);
             $stmt->bindParam(':responsible', $responsible);
-
-            $stmt2 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message) VALUES (:sender, :receiver, 1, "Solicito un nuevo bien")');
-            $stmt2->bindParam(':sender', $responsible);
-            $stmt2->bindParam(':receiver', $receiver['n_dependencia']);
             try {
-              $stmt->execute();
-              $stmt2->execute();
+                $stmt->execute();
+                $id_solicitud = $conn->lastInsertId();
+                $stmt2 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message, id_solicitud) VALUES (:sender, :receiver, 1, "Solicito un nuevo bien", :id_solicitud)');
+                $stmt2->bindParam(':sender', $responsible);
+                $stmt2->bindParam(':receiver', $receiver['n_dependencia']);
+                $stmt2->bindParam(':id_solicitud', $id_solicitud);
+                $stmt2->execute();
             } catch (\Throwable $th) {
-                echo "Error al insertar el bien";
+                echo "Error al insertar el bien o la notificación: " . $th->getMessage();
             }
         }
     } else {

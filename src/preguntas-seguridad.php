@@ -37,13 +37,40 @@
     <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/preguntas-seguridad.css">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+    <script src="js/sweetalert2.js"></script>
 </head>
 <body>
     <div class="container">
         <?php include 'assets/include/menu.php'; ?>
         <main class="main">
-            
-            <form action="" class="form">
+
+            <form action="" class="form hidden" id="form2">
+                <h2>Contraseña</h2>
+                <div class="form__group form__group--column ">
+                    <input type="password" name="password" id="password" class="security-question" placeholder="Contraseña actual">
+                    <span class="login-input-error3" id="password-error"></span>
+                </div>
+                <div class="form__group form__group--column">
+                    <input type="password" name="password" class="security-question" id="new-password" placeholder="Nueva contraseña">
+                    <span class="login-input-error3" id="new-password-error"></span>
+                </div>
+                <div class="form__group form__group--column">
+                    <input type="password" name="password" class="security-question" id="confirm-password" placeholder="Confirmar nueva contraseña">
+                    <span class="login-input-error3" hidden></span>
+                </div>
+                <button type="submit" class="button"><span>Continuar</span></button>
+            </form>
+
+            <div class="menu-selection">
+                <img src="assets/logo-sistema.png" alt="" class="logo">
+                <h2>¿Que quieres hacer?</h2>
+                <div class="menu-selection__buttons">
+                    <button class="menu-selection__button menu-selection__button--selected" id="change-question">Cambiar preguntas de seguridad</button>
+                    <button class="menu-selection__button" id="change-password">Cambiar contraseña</button>
+                </div>
+            </div>
+
+            <form action="" class="form" id="form1">
                 <h2>Preguntas de seguridad</h2>
                 <div class="form__group">
                     <select name="pregunta1" class="security-question">
@@ -84,5 +111,6 @@
             </form>
         </main>
     </div>
+    <script src="js/security-question.js"></script>
 </body>
 </html>

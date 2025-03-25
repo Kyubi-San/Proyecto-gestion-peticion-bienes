@@ -34,16 +34,22 @@ if ($_POST) {
 // Asignar valores a las variables desde $_POST
 
   $stmt = $conn->prepare("UPDATE solicitudes SET aprobado = '-1', comentario_admin = :commentAdmin WHERE n_solicitud = :id");  
+  $stmt2 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message) VALUES (:sender, :receiver, 2, :message)');
+  $stmt3 = $conn->prepare("DELETE FROM notificaciones WHERE id_solicitud = :id AND type = 1");
+
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':commentAdmin', $commentAdmin);
-  $stmt2 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message) VALUES (:sender, :receiver, 2, :message)');
+
   $stmt2->bindParam(':receiver', $responsable);
   $stmt2->bindParam(':sender', $sender);
   $stmt2->bindParam(':message', $message);
 
+  $stmt3->bindParam(':id', $id);
+
       try {
         $stmt->execute();
         $stmt2->execute();
+        $stmt3->execute();
         header('Location: solicitudes-rechazadas.php');
   
       } catch (\Throwable $th) {

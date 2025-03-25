@@ -143,6 +143,12 @@ function isActive($page) {
     border: none;
 }
 
+@media(max-width: 800px) {
+    .menu {
+        display: none;
+    }
+}
+
 </style>
 <aside class="menu">
     <nav class="menu__nav">

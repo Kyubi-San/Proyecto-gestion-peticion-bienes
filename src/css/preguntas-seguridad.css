@@ -15,53 +15,123 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    background: white;
     align-items: center;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    background: white;
 }
 
 .container {
     width: 100%;
     height: 100vh;
-    background-color: var(--tertiary-color);
     display: grid;
     grid-template-areas: 
         "menu main"
     ;
     grid-template-columns: 300px 1fr;
-    gap: 10px;
 }
 
 .main {
     grid-area: main;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    margin: 10px;
 }
-.form h2 {
-    color: #2c3e50;
+
+.menu-selection {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    background: #f5f6fa;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2em;
+    border: 1px solid whitesmoke;
+    background: url(../assets/macOS-Monterey-wallpaper-Light.webp);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 100;
+    position: relative;
+}
+
+.menu-selection h2 {
+    color: #130f40;
+    font-weight: bolder;
+    font-size: 1.8em;
+}
+
+.logo {
+    width: 10%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.menu-selection__buttons {
+    display: flex;
+    width: 100%;
+    gap: 1em;
+}
+
+.menu-selection__button {
+    width: 20%;
+    background: #D7CDE3;
+    height: 50px;
+    cursor: pointer;
+    color: #000000;
+    border: 1px solid #ecf0f1;
+    padding: 1em;
+    border-radius: 10px;
+    text-wrap: nowrap;
+    transition: all .3s;
+}
+
+.menu-selection__button:hover:not(.menu-selection__button--selected) {
+    background: #D6A2E8;
+    color: #FFFFFF;
+    border: none;
+}
+
+.menu-selection__button--selected {
+    background: #6F42C1;
+    color: #FFFFFF;
+    font-weight: bolder;
+    border: none;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    width: 80%;
-    background: white;
-    padding: 3em;
-    border-radius: 5px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    justify-content: space-between;
-    height: 60%;
+    width: 60%;
+    padding: 2em;
+    height: 400px;
+    justify-content: space-between;   
+    transition: all 1s; 
+    flex-grow: 1;
+    margin: auto;
+}
+
+.form h2 {
+    color: #2c3e50;
+}
+
+.hidden {
+    display: none;
+    height: 0;
 }
 
 .form__group {
     display: flex;
     gap: 1em;
+}
+
+.form__group--column {
+    flex-direction: column;
 }
 
 .security-question {
@@ -86,18 +156,29 @@ body {
 }
 
 .button {
-    width: 50%;
-    background: #3498db;
+    width: 60%;
+    background: #8e44ad;
     border: none;
     cursor: pointer;
     padding: 1em;
-    border-radius: 5px;
-    color: #ecf0f1;
+    border-radius: 10px;
+    color: white;
     align-self: center;
     margin: 1em;
     transition: .3s background;
 }
 
 .button:hover {
-    background: #2980b9;
+    background: #9b59b6;
+}
+
+.custom-font-size {
+    font-size: 10px;
+}
+
+.login-input-error3 {
+    color: red;
+    font-size: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
