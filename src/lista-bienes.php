@@ -50,7 +50,7 @@ require '../server/db.php';
             </div>
           </div>
           <?php
-            $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE responsible =".$_SESSION['user_id']);
+            $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate = '0000-00-00' AND responsible =".$_SESSION['user_id']);
             $row = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($row['total'] < 1) {

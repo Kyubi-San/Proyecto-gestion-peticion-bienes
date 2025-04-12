@@ -86,7 +86,7 @@ if ($_POST) {
     <?php include 'assets/include/menu.php'?>
     <main class="main">
         <form action="" method="POST" id="form" class="form" autocomplete="off">
-            <h2>Solicitar retiro de un bien</h2>
+            <h2>Solicitar desincorporacion de un bien</h2>
             <h3>Selecciona el bien a desincorporar</h3>
 
             <div class="input-container">

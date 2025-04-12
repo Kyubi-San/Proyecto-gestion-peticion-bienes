@@ -25,7 +25,7 @@ body {
 
 .container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: white;
     display: grid;
     grid-template-areas: 
@@ -225,8 +225,31 @@ tr:hover {
     color: #d63031;
 }
 
+.estate-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table__pending-estatus {
+    border-bottom: 1px dashed #95a5a6;
+}
+
+.estate-status:hover .table__pending-estatus {
+    visibility: hidden;
+}
+
+.estate-status:hover .table__icon-delete--pending {
+    visibility: visible;
+}
+
 .table__icon--delete {
     color: #d63031;
+}
+
+.table__icon-delete--pending {
+    position: absolute;
+    visibility: hidden;
 }
 
 @media print {

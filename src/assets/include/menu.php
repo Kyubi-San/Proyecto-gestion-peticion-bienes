@@ -169,7 +169,7 @@ function isActive($page) {
                     <span>Mis Bienes</span>
                 </a>
                 <a href="bienes-desincorporados.php#menu-estate" class="menu__options-item <?php echo isActive('bienes-desincorporados.php');?>">
-                    <span>Bienes desincorporados</span>
+                    <span>Mis Bienes Desincorporados</span>
                 </a>
                 <?php if ($records['admin'] >= 1):?>
                     <a href="agregar-bien.php#menu-estate" class="menu__options-item <?php echo isActive('agregar-bien.php');?>">
@@ -177,6 +177,9 @@ function isActive($page) {
                     </a>
                     <a href="lista-bienes.php#menu-estate" class="menu__options-item <?php echo isActive('lista-bienes.php');?>">
                         <span>Lista de Bienes</span>
+                    </a>
+                    <a href="lista-bienes-desincorporados.php#menu-estate" class="menu__options-item <?php echo isActive('lista-bienes-desincorporados.php');?>">
+                        <span>Lista de Bienes Desincorporados</span>
                     </a>
                 <?php endif; ?>
             </div>
@@ -195,7 +198,7 @@ function isActive($page) {
                     <span>Solicitar Bien</span>
                 </a>
                 <a href="solicitud-desincorporacion.php#menu-request" class="menu__options-item <?php echo isActive('solicitud-desincorporacion.php');?>">
-                    <span>Solicitar retiro de bien</span>
+                    <span>Desincorporar bien</span>
                 </a>
                 <?php if ($records['admin'] >= 1):?>
                     <a href="lista-solicitudes.php#menu-request" class="menu__options-item <?php echo isActive('lista-solicitudes.php');?>">

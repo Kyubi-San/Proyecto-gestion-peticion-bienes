@@ -64,7 +64,7 @@ require '../server/db.php';
           <table id="goodsTable">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>N°</th>
                 <th>Solicitante</th>
                 <th>Fecha Solicitud</th>
                 <th>Nombre</th>

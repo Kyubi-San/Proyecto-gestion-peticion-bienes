@@ -3,7 +3,7 @@
 require 'assets/include/session_start.php';
 require '../server/db.php';
 
-  if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
+if (!isset($_SESSION['user_id']) || $records['admin'] < 1) {
     header('Location: login.php');
   }
 
@@ -13,7 +13,7 @@ require '../server/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listado de Bienes</title>
+  <title>Mis Bienes</title>
   <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
   <link rel="stylesheet" href="css/lista-bienes.css">
   <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
@@ -23,14 +23,14 @@ require '../server/db.php';
   <div class="container">
     <?php include 'assets/include/menu.php'?>
     <header class="main__header">
-      <i class="fas fa-file-alt"></i>
+      <i class="fas fa-box"></i>
         <div class="main__header-title">
-          <span class="main__header-currentDir"><a href="#menu-request" class="main__header-currentDir--pre">Solicitudes</a> / Solicitudes rechazadas</span>
-          <h2>Solicitudes rechazadas</h2>
+          <span class="main__header-currentDir"><a href="#menu-estate" class="main__header-currentDir--pre">Bienes</a > / Lista de bienes desincorporados</span>
+          <h2>Lista de todos los bienes desincorporados</h2>
         </div>
     </header>
     <main class="main">
-      <?php include 'assets/include/filters.php'; ?>
+        <?php include 'assets/include/filters.php' ?>
         <section class="myEstates">
         <div class="myEstates__header">
             <div class="myEstates__header-title">
@@ -41,53 +41,54 @@ require '../server/db.php';
               </div>
             </div>
             <div class="myEstates__header-info">
-              <h4>Solicitudes rechazadas</h4>
+              <h4>Lista de bienes desincorporados</h4>
               <span class="myEstates__header-total">Total: <?php
-              $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes WHERE aprobado < 0");
+              $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate != '0000-00-00' AND responsible =".$_SESSION['user_id']);
               $row = $query->fetch(PDO::FETCH_ASSOC);
               echo $row['total'];
               ?></span>
             </div>
           </div>
           <?php
-            $query = $conn->query("SELECT COUNT(*) as total FROM solicitudes WHERE aprobado < 0");
+            $query = $conn->query("SELECT COUNT(*) as total FROM bienes WHERE withdrawalDate != '0000-00-00'");
             $row = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($row['total'] < 1) {
               echo '
               <div class="myEstate__message">
-                <p>Ninguna solicitud a sido rechazada</p>
+                <p>No tienes ningun bien desincorporado</p>
                 <i class="fa-solid fa-ghost"></i>
               </div>';
             }
           ?>
+          
           <table id="goodsTable">
             <thead>
               <tr>
-                <th>N°</th>
-                <th>Solicitante</th>
-                <th>Fecha Solicitud</th>
+                <th>ID</th>
+                <th>Responsable</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Tipo de Bien</th>
-                <th>Comentario</th>
-                <th>Motivo de rechazo</th>
+                <th>Fecha Solicitud</th>
+                <th>Fecha Aprobación</th>
+                <th>Fecha de retiro</th>
               </tr>
             </thead>
             <tbody>
               <!-- Aquí se llenarán los bienes -->
               <?php
-              foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia WHERE aprobado < 0') as $row):
+              foreach ($conn->query('SELECT * from bienes INNER JOIN usuario ON bienes.responsible = usuario.n_dependencia WHERE withdrawalDate != "0000-00-00"') as $row):
               ?>
               <tr class="table-dates estate__item">
-                <td class="estates-id"><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
+                <td class="estates-id"><?php echo htmlspecialchars($row['id']); ?></td>
                 <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                <td class="estates-request"><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                <td class="estates-name"><?php echo htmlspecialchars($row['bien']); ?></td>
-                <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
-                <td><?php echo htmlspecialchars($row['comentario']); ?></td>
-                <td><?php echo htmlspecialchars($row['comentario_admin']); ?></td>
+                <td class="estates-name"><?php echo htmlspecialchars($row['name']); ?></td>
+                <td class="estates-description"><?php echo htmlspecialchars($row['description']); ?></td>
+                <td class="estates-type"><?php echo htmlspecialchars($row['type']); ?></td>
+                <td class="estates-request"><?php echo htmlspecialchars($row['requestDate']); ?></td>
+                <td><?php echo htmlspecialchars($row['approvalDate']); ?></td>
+                <td><?php echo htmlspecialchars($row['withdrawalDate']); ?></td>
               </tr>
               <?php
               endforeach;?>

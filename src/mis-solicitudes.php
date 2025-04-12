@@ -14,6 +14,7 @@ require '../server/db.php';
   <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
   <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
   <script src="js/desplegar-tabla.js"></script>
+  <script src="js/sweetalert2.js"></script>
 </head>
 <body>
   <div class="container">
@@ -60,7 +61,7 @@ require '../server/db.php';
           <table id="goodsTable">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>N°</th>
                 <th>Fecha Solicitud</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
@@ -81,12 +82,13 @@ require '../server/db.php';
                 <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
                 <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
                 <td><?php echo htmlspecialchars($row['comentario']); ?></td>
-                <td>
+                <td class="estate-status">
                 <?php
                   if ($row["aprobado"] == 1) {
                     echo '<span style="color:#27ae60;">Aprobado</span>';
                   } elseif ($row["aprobado"] == 0) {
-                    echo '<span style="color:#34495e;">Pendiente</span>';
+                    echo '<span style="color:#34495e;" class="table__pending-estatus">Pendiente</span>
+                    <i class="fa-solid fa-trash table__icon-delete--pending table__icon--delete" onclick="deleteRequest('.$row["n_solicitud"].')"></i>';
                   } else {
                     echo '<span href="solicitudes-rechazadas.php#menu-request" title="Motivo de rechazo: '.$row['comentario_admin'].'" style="color:#c0392b; text-wrap: nowrap;">Rechazado</span>';
                   }
@@ -101,5 +103,36 @@ require '../server/db.php';
       </main>
   </div>
   <script src="js/filters.js"></script>
+  <script>
+    function deleteRequest(id) {
+      Swal.fire({
+        text: "¿Quieres eliminar esta solicitud?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Aceptar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '../server/routes/delete-request.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.send('n_solicitud=' + id);
+          xhr.onload = function() {
+            window.location.href="mis-solicitudes.php"
+          }
+            Swal.fire({
+              title: "",
+              position: "top-end",
+              text: "La solicitud fue eliminada",
+              showConfirmButton: false,
+              icon: "success",
+              timer: 1500
+            });
+        }
+      })
+    }
+  </script>
 </body>
 </html>

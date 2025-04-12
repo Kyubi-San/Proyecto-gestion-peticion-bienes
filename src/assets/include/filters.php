@@ -12,7 +12,7 @@
     <div class="filters__menu-estateInfo">
       <h4>Informacion de bien</h4>
       <div class="estateInfo__filter">
-        <label for="">Filtrar por ID:</label>
+        <label for="">Filtrar por Identificacion (ID):</label>
         <input type="text" class="filters__input" name="id" placeholder="ID" />
       </div>
       <div class="estateInfo__filter">

@@ -39,7 +39,6 @@ require '../server/db.php';
                             <span><b>Correo: </b><?php echo $row['correo'];?></span>
                         </div>
                         <div class="card__actions">
-                            <a href="" class="actions__button actions__button--delete">Eliminar Usuario</a>
                             <a href='account/email.php?id=<?php echo $row["n_dependencia"]?>' class="actions__button">Informacion de usuario</a>
                         </div>
                     </div>
