@@ -31,13 +31,21 @@
             <div class="account-info">
                 <form id="formulario1" action="../server/routes/account-info.php" class="account-info__form">
                     <label for="" class="placeholder">Nombre de usuario</label>
-                    <input type="text" class="account-info__form-input" value="<?php echo $records['username']; ?>" disabled>
-                    <button type="button" class="account-info__form-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <input type="text" class="account-info__form-input" id="username-input" value="<?php echo $records['username']; ?>" disabled>
+                    <button type="button" class="account-info__form-button">
+                        <i class="fa-solid fa-pen-to-square firstStep-icon"></i>
+                        <i class="fa-solid fa-check secondStep-icon" style="display: none;"></i>
+                        <i class="fa fa-spinner fa-spin loadingIcon" style="display: none;"></i>
+                    </button>
                 </form>
                 <form id="formulario2" class="account-info__form">
                     <label for="" class="placeholder">Direccion de correo electronico</label>
                     <input type="text" class="account-info__form-input" value="<?php echo $_SESSION['email']; ?>" disabled>
-                    <button type="button" class="account-info__form-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button type="button" class="account-info__form-button">
+                        <i class="fa-solid fa-pen-to-square firstStep-icon"></i>
+                        <i class="fa-solid fa-check secondStep-icon" style="display: none;"></i>
+                        <i class="fa fa-spinner fa-spin loadingIcon" style="display: none;"></i>
+                    </button>
                 </form>
             </div>
             <h3>Datos Personales</h3>

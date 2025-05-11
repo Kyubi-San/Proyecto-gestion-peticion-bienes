@@ -39,10 +39,29 @@ if (!isset($_SESSION['user_id'])) {
 
                         if ($row['total'] != 0) {
                             foreach ($conn->query('SELECT * from notificaciones WHERE receiver ='.$_SESSION['user_id'].' ORDER BY id DESC') as $notifications) {
+                            $hora = $notifications['time'];
+                            $objeto_hora = DateTime::createFromFormat('H:i:s', $hora);
+                            $hora_formateada = $objeto_hora->format('h:i A');
+
                                 $sender = $conn->prepare('SELECT nombre_dependencia from usuario WHERE n_dependencia ='.$notifications['sender']);
+
                                 $sender->execute();
                                 $sender = $sender->fetch(PDO::FETCH_ASSOC);
-                                echo "<a href='#' class='notification__menu-item'><i class='fas fa-file-alt'></i><div class='notification__menu-info'><span class='notification__menu-sender'>".$sender['nombre_dependencia']."</span><span class='notification__menu-message'>".$notifications['message']."</span></div></a>";
+                                echo "
+                                <a href='#' class='notification__menu-item'>
+                                    <i class='fas fa-file-alt'></i>
+                                    <div class='notification__menu-info'>
+                                        <span class='notification__menu-sender'>"
+                                            .$sender['nombre_dependencia'].
+                                        "</span>
+                                        <span class='notification__menu-message'>"
+                                        .$notifications['message'].
+                                        "</span>
+                                    </div>
+                                    <span class='notification__menu-timestamp'>"
+                                        .$hora_formateada.
+                                    "</span>
+                                </a>";
                             }
                         } else {
                             echo '<span class="notification__menu-item notification__menu-item--empty"><i class="fa-solid fa-ghost"></i>No tienes notificaciones por ahora</span>';
@@ -131,7 +150,7 @@ if (!isset($_SESSION['user_id'])) {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>N°</th>
                                 <th>Solicitante</th>
                                 <th>Fecha</th>
                                 <th>Nombre</th>
@@ -178,25 +197,25 @@ if (!isset($_SESSION['user_id'])) {
                 </a>
                 <a class="nav__item" href="bienes-desincorporados.php#menu-estate">
                         <i class="fa-solid fa-box nav__item-icon"></i>
-                        <span class="nav__item-textBox">Mis bienes retirados</span>
+                        <span class="nav__item-textBox">Mis bienes desincorporados</span>
                 </a>
                 <a class="nav__item" href="mis-solicitudes.php#menu-request">
                         <i class="fas fa-file-alt nav__item-icon"></i>
                         <span class="nav__item-textBox">Mis solicitudes</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="solicitud-bienes.php#menu-request">
                         <i class="fas fa-file-alt nav__item-icon"></i>
                         <span class="nav__item-textBox">Solicitar bien</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="solicitud-desincorporacion.php#menu-request">
                     <i class="fas fa-file-alt nav__item-icon"></i>
-                    <span class="nav__item-textBox">Solicitar retiro</span>
+                    <span class="nav__item-textBox">Solicitar desincorporacion</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="personal.php#menu-user">
                     <i class="fas fa-user nav__item-icon"></i>
                     <span class="nav__item-textBox">Configuracion de la cuenta</span>
                 </a>
-                <a class="nav__item">
+                <a class="nav__item" href="preguntas-seguridad.php#menu-request">
                     <i class="fas fa-user nav__item-icon"></i>
                     <span class="nav__item-textBox">Preguntas de seguridad</span>
                 </a>

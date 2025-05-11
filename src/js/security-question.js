@@ -45,6 +45,7 @@ function validatePassword() {
 newPassword.addEventListener('input', validatePassword)
 confirmPassword.addEventListener('input', validatePassword)
 const passwordError = document.getElementById('password-error')
+const emailValue = document.getElementById('email').value
 
 form2.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -56,19 +57,26 @@ form2.addEventListener('submit', (e) => {
         if (xhr.responseText === 'true') {
             passwordError.innerHTML = ""
             if (validatePassword()) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    width: "450",
-                    color: "#636e72",
-                    customClass: {
-                        popup: 'custom-font-size'
-                    },
-                    title: "Tu contraseña fue cambiada con exito",
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  form2.reset()
+                xhr.open('POST', '../server/routes/change-password.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('newPassword=' + newPassword.value + '&confirmPassword=' + confirmPassword.value + '&email=' + emailValue)
+                xhr.onload = function() {
+                    if (xhr.responseText) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            width: "450",
+                            color: "#636e72",
+                            customClass: {
+                                popup: 'custom-font-size'
+                            },
+                            title: "Tu contraseña fue cambiada con exito",
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                          form2.reset()
+                    }
+                }
             }
           } else {
             passwordError.innerHTML = "Contraseña incorrecta";

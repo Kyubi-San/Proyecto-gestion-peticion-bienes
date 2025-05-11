@@ -64,14 +64,14 @@ require '../server/db.php';
           <table id="goodsTable">
             <thead>
               <tr>
-                <th>N°</th>
-                <th>Solicitante</th>
-                <th>Fecha Solicitud</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Tipo de Bien</th>
-                <th>Comentarios</th>
-                <th>Estado</th>
+                <th scope="col">N°</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Fecha Solicitud</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Tipo de Bien</th>
+                <th scope="col">Comentarios</th>
+                <th scope="col">Estado</th>
               </tr>
             </thead>
             <tbody>
@@ -80,13 +80,27 @@ require '../server/db.php';
               foreach ($conn->query('SELECT * from solicitudes INNER JOIN usuario ON solicitudes.id_usuario = usuario.n_dependencia ORDER BY fecha_solicitud') as $row):
               ?>
               <tr class="table-dates estate__item">
-                <td class="estates-id"><?php echo htmlspecialchars($row['n_solicitud']); ?></td>
-                <td><?php echo htmlspecialchars($row['nombre_dependencia']); ?></td>
-                <td class="estates-request"><?php echo htmlspecialchars($row['fecha_solicitud']); ?></td>
-                <td class="estates-name"><?php echo htmlspecialchars($row['bien']); ?></td>
-                <td class="estates-description"><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                <td class="estates-type"><?php echo htmlspecialchars($row['tipo_bien']); ?></td>
-                <td><?php echo htmlspecialchars($row['comentario']); ?></td>
+                <td scope="row" class="estates-id">
+                  <?php echo htmlspecialchars($row['n_solicitud']); ?>
+                </td>
+                <td>
+                  <?php echo htmlspecialchars($row['nombre_dependencia']); ?>
+                </td>
+                <td class="estates-request">
+                  <?php echo htmlspecialchars($row['fecha_solicitud']); ?>
+                </td>
+                <td class="estates-name">
+                  <?php echo htmlspecialchars($row['bien']); ?>
+                </td>
+                <td class="estates-description">
+                  <?php echo htmlspecialchars($row['descripcion']); ?>
+                </td>
+                <td class="estates-type">
+                  <?php echo htmlspecialchars($row['tipo_bien']); ?>
+                </td>
+                <td>
+                  <?php echo htmlspecialchars($row['comentario']); ?>
+                </td>
                 <td><?php
                   if ($row["aprobado"] == 1) {
                     echo '<span style="color:#27ae60;">Aprobado</span>';

@@ -73,55 +73,56 @@ if ($_POST) {
     <div class="container">
       <?php include 'assets/include/menu.php'?>
       <main class="main">
-
-      <form action="" class="form" method="POST" id="form">
-          <div class="form-group">
-            <label for="">ID:</label>
-            <input
-            type="number"
-            value="<?php echo $id;?>"
-            id="newId"
-            placeholder="ID del bien"
-            min="1"
-            name="id"
-            disabled
-            class="form__input"
-           />
-          </div>
-          <div class="form-group">
-            <label for="">Nombre del bien:</label>
-            <input type="text" class="form__input" value="<?php echo $name;?>" name="name" id="newName" placeholder="Nombre del bien"/>
-          </div>
-          <div class="form-group">
-            <label for="">Descripcion:</label>
-            <input type="text" class="form__input" value="<?php echo $description;?>" name="description" id="newDescription" placeholder="Descripción"/>
-          </div>
-          <div class="form-group">
-              <label for="newType">Tipo de Bien:</label>
-              <select id="newType" name="type" class="form__input">
-                <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
+      <div class="form-container">
+        <h2>Rechazar solicitud</h2>
+        <form action="" class="form" method="POST" id="form">
+            <div class="input-container--name">
+              <label for="">Nombre del bien:</label>
+              <input type="text" class="form__input" value="<?php echo $name;?>" name="name" id="newName" placeholder="Nombre del bien"/>
+            </div>
+            <div class="form-group">
+              <label for="">ID:</label>
+              <input
+              type="number"
+              value="<?php echo $id;?>"
+              id="newId"
+              placeholder="ID del bien"
+              min="1"
+              name="id"
+              disabled
+              class="form__input"
+            />
+            </div>
+            <div class="form-group">
+              <label for="">Descripcion:</label>
+              <input type="text" class="form__input" value="<?php echo $description;?>" name="description" id="newDescription" placeholder="Descripción"/>
+            </div>
+            <div class="form-group">
+                <label for="newType">Tipo de Bien:</label>
+                <select id="newType" name="type" class="form__input">
+                  <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="newType">Responsable:</label>
+              <select name="responsible" id="" name="responsible" class="form__input">
+                  <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
               </select>
-          </div>
-          <div class="form-group">
-            <label for="newType">Responsable:</label>
-            <select name="responsible" id="" name="responsible" class="form__input">
-                <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="newType">Comentario:</label>
-            <input type="text" class="form__input" value="<?php echo $comments;?>" id="comments" placeholder="Comentarios" name="comments"/>
-          </div>
-          <div class="form-group">
-            <label for="newType">Añadir un comentario al usuario:</label>
-            <textarea class="form__input" id="commentAdmin" placeholder="Comentario de porque se rechaza la solicitud" name="commentAdmin"></textarea>
-          </div>
-          <div class="form-group--button">
-            <a href="solicitudes-pendientes.php" class="form-button">Cancelar</a>
-            <button class="form-button form-button--decline" type="submit">Rechazar Solicitud</button>
-          </div>        
-      </form>
-      
+            </div>
+            <div class="form-group">
+              <label for="newType">Comentario:</label>
+              <input type="text" class="form__input" value="<?php echo $comments;?>" id="comments" placeholder="Comentarios" name="comments"/>
+            </div>
+            <div class="input-container--description">
+              <label for="newType">Añadir un comentario al usuario:</label>
+              <textarea class="form__input" id="commentAdmin" placeholder="Comentario de porque se rechaza la solicitud" name="commentAdmin"></textarea>
+            </div>
+            <div class="form-group--button">
+              <a href="solicitudes-pendientes.php" class="form-button">Cancelar</a>
+              <button class="form-button form-button--decline" type="submit">Rechazar Solicitud</button>
+            </div>        
+        </form>
+      </div>
       </main>
     </div>
     <script src="js/gestion-solicitudes.js"></script>

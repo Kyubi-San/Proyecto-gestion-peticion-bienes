@@ -46,13 +46,13 @@ if ($_POST) {
     
     $currentDate = date('Y-m-d');
     $id = $_POST['tipo_bien'];
-    $password = htmlspecialchars($_POST['password']);
+    // $password = htmlspecialchars($_POST['password']);
 
-    $registro = $conn->prepare("SELECT contrasena FROM usuario WHERE n_dependencia =".$_SESSION['user_id']);
-    $registro->execute();
-    $resultado = $registro->fetch(PDO::FETCH_ASSOC);
+    // $registro = $conn->prepare("SELECT contrasena FROM usuario WHERE n_dependencia =".$_SESSION['user_id']);
+    // $registro->execute();
+    // $resultado = $registro->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultado && password_verify($password, $resultado['contrasena'])) {
+    // if ($resultado && password_verify($password, $resultado['contrasena'])) {
         $stmt = $conn->prepare("UPDATE bienes SET withdrawalDate = :currentDate WHERE id = :id");
     
         $stmt->bindParam(':id', $id);
@@ -63,9 +63,9 @@ if ($_POST) {
         } catch (\Throwable $th) {
             echo "Error al insertar el bien";
         }
-    } else {
-        $messageError = "Contraseña incorrecta";
-    }
+    // } else {
+    //     $messageError = "Contraseña incorrecta";
+    // }
 }
 ?>
 
@@ -111,17 +111,17 @@ if ($_POST) {
                     echo $results; 
                 } ?>
             </div>
-            
+<!--             
             <div class="input-container">
                 <input type="password" class="input" id="password" name="password" placeholder=" " required>
                 <label for="password" class="placeholder">Contraseña</label>
             </div>
             
-            <span class="message-error"></span>
+            <span class="message-error"></span> -->
             
             <div class="button__group">
                 <a href="index.php" class="input__button input__button--cancel">Cancelar</a>
-                <input type="submit" value="Solicitar" class="input__button">
+                <input type="submit" value="Desincorporar" class="input__button">
             </div>
         </form>
     </main>

@@ -35,6 +35,9 @@ $responsible = $row['nombre_dependencia'];
 $responsable = $row['id_usuario'];
 $approbed = $row['aprobado'];
 
+$sender = $_SESSION['user_id'];
+$message = 'Aprobo tu solicitud de '.$name;
+
 if ($approbed == 1) {
   header('Location: login.php');
 }
@@ -46,6 +49,7 @@ if ($_POST) {
       $stmt = $conn->prepare("INSERT INTO bienes (id, name, description, type, requestDate, comments, responsible) VALUES (:uuid, :name, :description, :type, :requestDate, :comments, :responsable)");
       $stmt2 = $conn->prepare("UPDATE solicitudes SET aprobado = '1' WHERE n_solicitud = :id");
       $stmt3 = $conn->prepare("DELETE FROM notificaciones WHERE id_solicitud = :id");
+      $stmt4 = $conn->prepare('INSERT INTO notificaciones (sender, receiver, type, message) VALUES (:sender, :receiver, 2, :message)');
   
       $stmt->bindParam(':uuid', $uuid);
       $stmt->bindParam(':requestDate', $requestDate);
@@ -58,11 +62,16 @@ if ($_POST) {
       $stmt2->bindParam(':id', $id);
 
       $stmt3->bindParam(':id', $id);
+
+      $stmt4->bindParam(':sender', $sender);
+      $stmt4->bindParam(':receiver', $responsable);
+      $stmt4->bindParam(':message', $message);
       
       try {
         $stmt->execute();
         $stmt2->execute();
         $stmt3->execute();
+        $stmt4->execute();
         header('Location: lista-bienes.php');
   
       } catch (\Throwable $th) {
@@ -86,61 +95,54 @@ if ($_POST) {
     <div class="container">
       <?php include 'assets/include/menu.php'?>
       <main class="main">
-
-      <form action="" class="form" method="POST" id="form">
-        <div class="form-group">
-          <label for="">ID:</label>
-          <input
-          type="number"
-          value="<?php echo $id;?>"
-          id="newId"
-          placeholder="ID del bien"
-          min="1"
-          name="id"
-          disabled
-          class="form__input"
-         />
-        </div>
-        <div class="form-group">
-          <label for="">Nombre del bien:</label>
-          <span class="form__input"><?php echo $name;?></span>
-          <input type="hidden" value="<?php echo $name;?>" name="name">
-        </div>
-        <div class="form-group">
-          <label for="">Descripcion:</label>
-          <span class="form__input"><?php echo $description;?></span>
-          <input type="hidden" name="description" value="<?php echo $description;?>">
-        </div>
-        
-        <div class="form-group">
-            <label for="newType">Tipo de Bien:</label>
-            <select id="newType" name="type" class="form__input">
-              <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="newType">Responsable:</label>
-            <select name="" id="" name="responsible" class="form__input">
-                <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
-            </select>
-        </div>
-        <div class="form-group">
-          <label for="newType">Comentario:</label>
-          <span class="form__input"><?php echo $comments;?></span>
-          <input type="hidden" name="comments" value="<?php echo $comments;?>">
-        </div>
-    
-        <div class="form-group">
-            <label for="requestDate">Fecha de Solicitud:</label>
-            <span class="form__input"><?php echo $requestDate;?></span>
-            <input type="hidden" name="requestDate">
-        </div>
-        <div class="form-group--button">
-          <a href="solicitudes-pendientes.php" class="form-button">Volver</a>
-          <button class="form-button form-button--accept" type="submit">Aceptar Solicitud</button>
-        </div>        
-    </form>
+      <div class="form-container">
+        <h2>Aceptar solicitud</h2>
+        <form action="" class="form" method="POST" id="form">
+          <div class="input-container--name">
+            <label for="">Nombre del bien:</label>
+            <div class="form__input"><?php echo $name;?></div>
+            <input type="hidden" value="<?php echo $name;?>" name="name">
+          </div>
+          <div class="input-container">
+            <label for="">ID:</label>
+            <input type="number" value="<?php echo $id;?>" id="newId" placeholder="ID del bien" min="1" name="id" disabled class="form__input"
+          />
+          </div>
+          <div class="input-container">
+            <label for="">Descripcion:</label>
+            <div class="form__input"><?php echo $description;?></div>
+            <input type="hidden" name="description" value="<?php echo $description;?>">
+          </div>
+          
+          <div class="input-container">
+              <label for="newType">Tipo de Bien:</label>
+              <select id="newType" name="type" class="form__input">
+                <option value="<?php echo $type;?>" selected><?php echo $type;?></option>
+              </select>
+          </div>
+          <div class="input-container">
+              <label for="newType">Responsable:</label>
+              <select name="" id="" name="responsible" class="form__input">
+                  <option value="<?php echo $responsible;?>" selected><?php echo $responsible;?></option>
+              </select>
+          </div>
+          <div class="input-container--description">
+            <label for="newType">Comentario:</label>
+            <div class="form__input"><?php echo $comments;?></div>
+            <input type="hidden" name="comments" value="<?php echo $comments;?>">
+          </div>
       
+          <div class="input-container">
+              <label for="requestDate">Fecha de Solicitud:</label>
+              <div class="form__input"><?php echo $requestDate;?></div>
+              <input type="hidden" name="requestDate">
+          </div>
+          <div class="form-group--button">
+            <a href="solicitudes-pendientes.php" class="form-button">Volver</a>
+            <button class="form-button form-button--accept" type="submit">Aceptar Solicitud</button>
+          </div>        
+        </form>
+      </div> 
       </main>
     </div>
     <script src="js/gestion-solicitudes.js"></script>

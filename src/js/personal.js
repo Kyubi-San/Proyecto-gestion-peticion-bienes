@@ -6,6 +6,31 @@ var nombre = document.getElementById('nombre').value;
 var apellido = document.getElementById('apellido').value;
 var cedula = document.getElementById('cedula').value;
 
+const editInfoInput = document.querySelectorAll('.account-info__form-input')
+const editInfoButton = document.querySelectorAll('.account-info__form-button')
+const firstStepIcon = document.querySelectorAll('.firstStep-icon')
+const secondStepIcon = document.querySelectorAll('.secondStep-icon')
+const loadingIcon = document.querySelectorAll('.loadingIcon')
+
+for (let i = 0; i < editInfoButton.length; i++) {
+    editInfoButton[i].addEventListener('click', () => {
+        if (!editInfoInput[i].classList.contains('account-info__form-input--active')) {
+            editInfoInput[i].disabled = false
+            editInfoInput[i].classList.add('account-info__form-input--active')
+            firstStepIcon[i].style.display = 'none'
+            secondStepIcon[i].style.display = 'block'
+        } else {
+            editInfoInput[i].classList.remove('account-info__form-input--active')
+            secondStepIcon[i].style.display = 'none'
+            loadingIcon[i].style.display = 'block'
+            setTimeout(() => {
+                loadingIcon[i].style.display = 'none'
+                firstStepIcon[i].style.display = 'block'
+            }, 800)
+        }
+    })
+}
+
 form3.addEventListener('submit', (e) => {
   e.preventDefault();
   if (validarInput()) {

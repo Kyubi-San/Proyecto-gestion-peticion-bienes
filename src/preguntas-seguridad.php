@@ -5,6 +5,7 @@
     if (!isset($_SESSION['user_id'])) {
         header('Location: login.php');
     }
+
     $query = $conn->query('SELECT * from pregunta_seguridad WHERE id_usuario ='.$_SESSION['user_id']);
     $row = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -58,6 +59,7 @@
                     <input type="password" name="password" class="security-question" id="confirm-password" placeholder="Confirmar nueva contraseña">
                     <span class="login-input-error3" hidden></span>
                 </div>
+                <input type="hidden" name="email" id="email" value="<?php echo $_SESSION['email'] ?>">
                 <button type="submit" class="button"><span>Continuar</span></button>
             </form>
 

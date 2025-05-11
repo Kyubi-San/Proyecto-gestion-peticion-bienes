@@ -50,6 +50,7 @@ if ($_POST) {
     <link rel="shortcut icon" href="assets/logo-sistema.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/solicitud-bienes.css">
     <link href="assets/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -58,13 +59,13 @@ if ($_POST) {
     <main class="main">
         <form action="" method="post" class="form" autocomplete="off">
             <h2>Solicitud De Bienes</h2>
-            <h3>Ingresa los detalles</h3>
             <div class="input-container">
-                <input type="text" id="bien" class="input" name="bien" placeholder=" ">
-                <label for="bien" class="placeholder">Titulo</label>
+                <label for="bien">Nombre del bien</label>
+                <input type="text" id="bien" class="input" name="bien" placeholder="Escribe el nombre del bien">
             </div>
 
             <div class="input-container">
+                <label for="tipo_bien">Categoria</label>
                 <select id="tipo_bien" class="input" name="tipo_bien" required>
                     <option value="" selected disabled>Selecciona una categoria</option>
                     <option value="Electronico">Electrónico</option>
@@ -72,10 +73,11 @@ if ($_POST) {
                     <option value="Herramienta">Herramienta</option>
                     <option value="Otro">Otro...</option>
                 </select>
-                <label for="tipo_bien" class="placeholder--category">Categoria</label>
             </div>
 
-            <textarea name="descripcion" placeholder="Descripcion" required></textarea>
+            <label for="">Descripcion</label>
+            <textarea name="descripcion" placeholder="Tu descripción aquí" required></textarea>
+
             <label for="comentario">Comentario al administrador:</label>
             <textarea id="comentario" name="comentario" required></textarea>
 

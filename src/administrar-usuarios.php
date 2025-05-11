@@ -22,29 +22,28 @@ require '../server/db.php';
 </head>
 <body>
     <div class="container">
-
         <?php include 'assets/include/menu.php';?>
         <main class="main">
-            <?php foreach ($conn->query('SELECT * from usuario') as $row): ?>
-                <div class="card">
-                    <div class="avatar__container">
-                        <?php echo $row['admin'] >=1 ? '<i class="fa-solid fa-user-lock card__avatar"></i>' : '<i class="fa-solid fa-user card__avatar"></i>'?>
-                    </div>
-                    <div class="card__body">
-                        <header class="card__header">
-                            <h3><?php echo $row['nombre_dependencia'];?></h3>
-                        </header>
-                        <div class="card__content">
-                            <span><b>Nombre de usuario: </b><?php echo $row['username'];?></span>
-                            <span><b>Correo: </b><?php echo $row['correo'];?></span>
-                        </div>
-                        <div class="card__actions">
-                            <a href='account/email.php?id=<?php echo $row["n_dependencia"]?>' class="actions__button">Informacion de usuario</a>
-                        </div>
-                    </div>
+
+        <div class="card-container">
+        <?php foreach ($conn->query('SELECT * from usuario') as $row): ?>
+            <div class="card">
+                <?php echo $row['admin'] >=1 ?
+                '<span class="card__avatar"><i class="fa-solid fa-user-lock"></i></span>' :
+                '<span class="card__avatar"><i class="fa-solid fa-user card__img"></i></span>'?>
+                <div class="card__body">
+                    <h1 class="card__body-username"><?php echo $row['username'];?></h1>
+                    <span class="card__body-rolename"><?php echo $row['correo'];?></span>
                 </div>
-            
-            <?php endforeach; ?>
+                <div class="card__actions">
+                    <a href='account/email.php?id=<?php echo $row["n_dependencia"]?>' class="actions__button">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="mx-1">Informacion de usuario</span>
+                    </a>
+                </div>
+            </div> 
+        <?php endforeach; ?>
+        
         </main>
     </div>
     <script src="js/gestion-usuarios.js"></script>

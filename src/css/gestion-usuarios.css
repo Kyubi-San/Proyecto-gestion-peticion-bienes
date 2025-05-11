@@ -8,6 +8,8 @@
 
 * {
     box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
 }
 
 body {
@@ -23,7 +25,7 @@ body {
 .container {
     width: 100%;
     height: 100vh;
-    background-color: var(--tertiary-color);
+    background: white;
     display: grid;
     grid-template-areas: 
         "menu main"
@@ -35,70 +37,74 @@ body {
 .main {
     grid-area: main;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     overflow-y: auto;
 }
 
-.card {
-    width: 45%;
-    background: white;
-    margin: 1em;
-    position: relative;
-    display: flex;
-    align-items: center;
-    transition: all .5s;
-    cursor: pointer;
-    height: 250px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-}
-
-.card__body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.card__content {
-    width: 100%;
-    margin: 1em;
-    display: flex;
-    flex-direction: column;
+.card-container {
+    display: grid;
     gap: 1em;
+    margin-bottom: 1em;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 90%;
+    margin: auto;
 }
 
-.avatar__container {
-    height: 100%;
-    width: 30%;
-    background: #74b9ff;
+.card {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.card__header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    padding: 32px;
+    background: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 .card__avatar {
-    color: white;
-    font-size: 2em;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #bdc3c7;
+    background: #ecf0f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__avatar i {
+    font-size: 24px;
+    color: #4a5568;
+}
+
+.card__body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.card__body-username {
+    font-size: 24px;
+    text-transform: capitalize;
+    font-weight: 600;
+    word-spacing: -0.025em;
+    color: #4a5568;
+}
+
+.card__body-rolename {
+    color: gray;
 }
 
 .card__actions {
+    width: 100%;
     display: flex;
-    margin: 1em;
-    flex-grow: 1;
-    align-items: end;
     justify-content: center;
-    gap: 1em;
 }
 
 .actions__button {
+    display: flex;
+    align-items: center;
     background-color: #3498db;
+    gap: 5px;
     color: white;
     border: none;
     border-radius: 5px;

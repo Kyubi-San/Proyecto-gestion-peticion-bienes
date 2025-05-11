@@ -6,7 +6,6 @@ body {
     background: white;
     align-items: center;
     height: 100vh;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
 
@@ -33,6 +32,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: 'Inter', sans-serif;
 }
 
 .form {
@@ -47,9 +47,10 @@ body {
     flex-direction: column;
 }
 
-.form h1 {
-    color: #2c3e50;
-
+.form h2 {
+    color: #111827;
+    font-weight: bold;
+    font-size: 22px;
 }
 
 .form h3 {
@@ -60,7 +61,10 @@ body {
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
 }
 
 .input-container {
@@ -72,11 +76,16 @@ label {
     width: 100%;
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    color: #111827;
+    border-radius: 0.5rem;
     height: 50px;
-    margin-bottom: 10px;
     outline: none;
+    background: #f9fafb;
+}
+
+.input:focus {
+    box-shadow: 0 0 0 2px rgba(40, 108, 255, 0.863);
 }
 
 .button__group {
@@ -154,14 +163,20 @@ select {
 textarea {
     cursor: text;
     resize: none;
-    margin-bottom: 10px;
+    color: #111827;
+    background: #f9fafb;
     width: 100%;
     height: 100px;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 0.5rem;
     outline: none;
+    margin-bottom: 10px;
+}
+
+textarea:focus {
+    box-shadow: 0 0 0 2px rgba(40, 108, 255, 0.863);
 }
 
 .tipo {
@@ -211,7 +226,7 @@ textarea {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 1em;
     color: #2d3436;
     user-select: none;
 }

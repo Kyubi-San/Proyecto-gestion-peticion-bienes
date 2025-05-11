@@ -97,8 +97,8 @@ body {
 
 .myEstates {
     height: 600px;
-    border-radius: 5px;
-    background: #f5f6fa;
+    border-radius: 8px;
+    background: white;
     width: 100%;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -113,9 +113,8 @@ body {
     width: 100%;
     align-items: center;
     display: flex;
-    background: #f5f6fa;
+    background: white;
     justify-content: space-between;
-    border-bottom: #ddd 1px solid;
     z-index: 100;
 }
 
@@ -157,12 +156,6 @@ body {
     padding: 0;
 }
 
-table {
-    border-collapse: collapse;
-    cursor: pointer;
-    width: 100%;
-}
-
 .myEstate__message {
     position: absolute;
     display: flex;
@@ -185,23 +178,44 @@ table {
     margin-top: 10px;
 }
 
+
+table {
+    border-collapse: collapse;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+}
+
+thead {
+    background: #F9FAFB;
+    font-size: 12px;
+    color: #374151;
+    text-transform: uppercase;
+}
+
 th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
     text-align: center;
     max-width: 200px;
     overflow: hidden;
 }
 
-th {
-    color: #2980b9; /* Texto blanco en el encabezado */
-    background: #ecf0f1;
-    position: sticky;
-    top: 0;
+td {
+    padding: 1rem;
 }
 
-tr {
-    background: #dfe4ea;
+th {
+    color: #374151;
+    padding: 12px 1rem;
+    background: #F9FAFB;
+    position: sticky;
+}
+
+tr.table-dates {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td:first-child {
+    color: #111827;
 }
 
 .estate__item--clicked {
@@ -209,13 +223,6 @@ tr {
     overflow-wrap: anywhere;
 }
 
-tr:nth-child(even) {
-    background-color: #f1f2f6
-}
-
-tr:hover {
-    background-color: #bdc3c7;
-}
 
 .table__icon--check {
     color: green;

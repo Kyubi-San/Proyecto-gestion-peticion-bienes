@@ -88,10 +88,15 @@ body {
     width: 100%;
     padding: 1em;
     background-color: #ecf0f1;
-    
     margin: 0;
     padding-top: 35px;
     font-size: 14px;
+}
+
+.account-info__form-input--active {
+    background-color: #fff;
+    color: black;
+    outline: #b2bec3 1px solid;
 }
 
 .account-info__form-button {

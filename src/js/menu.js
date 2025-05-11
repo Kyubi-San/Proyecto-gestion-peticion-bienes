@@ -20,11 +20,11 @@ function deployItem(menuItem, deploy) {
 }
 
 bienes.addEventListener("click", () =>{
-    deployItem(bienesItem, 0)
+    deployItem(bienesItem, 1)
 })
 
 solicitudes.addEventListener("click", () =>{
-    deployItem(solicitudesItem, 1)
+    deployItem(solicitudesItem, 0)
 })
 
 usuarios.addEventListener("click", () =>{

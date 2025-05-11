@@ -141,6 +141,15 @@ body {
     color: #2c3e50;
 }
 
+.notification__menu-timestamp {
+    color: #636e72;
+    font-size: 12px;
+    align-self: flex-end;
+    flex-grow: 1;
+    display: flex;
+    justify-content: right;
+}
+
 .notification__menu-item:hover {
     background: #dfe6e9;
 }

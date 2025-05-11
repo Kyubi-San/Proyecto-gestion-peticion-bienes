@@ -56,18 +56,6 @@
         <main class="main">
             <?php include 'menu.php'?>
             
-            <section class="card">
-                <form action="" method="POST" class="card__form">
-                    <h2>Cambiar contraseña</h2>
-                    <p class="card__info-text">Cambia la dirección de correo que utilizas para acceder y recibir información del sistema</p>
-                        <div class="card__info">
-                            <span class="card__info-label">Correo actual</span>
-                            <input type="email" name="correo" class="card__info-email" value="<?php echo $row['correo'] ?>">
-                        </div>
-                        <p class="card__info-text-intructions">Cuando pulses sobre el botón a continuación se te enviará un enlace seguro a la bandeja de entrada de tu correo con instrucciones sobre cómo cambiar tu correo.</p>
-                        <button class="card__button">Cambiar correo</button>
-                </form>
-            </section>
         </main>
     </div>
 </body>

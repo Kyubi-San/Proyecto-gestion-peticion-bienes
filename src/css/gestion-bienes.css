@@ -36,41 +36,53 @@ body {
 .main {
     grid-area: main;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.main h2 {
+.form-container {
+    width: 60%;
+    padding: 1em;
+}
+
+.form-container h2 {
     color: #2d3436;
 }
 
 .form {
-    border: 1px solid #bdc3c7;
-    width: 50%;
-    height: 95%;
-    border-radius: 10px;
-    background: white;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-}
-
-.form h2 {
-    margin: 10px 0;
-}
-
-.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    border-radius: 10px;
 }
 
-.form-group div {
-    display: flex;
-    flex-direction: column;
+.input-container {
+    width: 100%;
+}
+
+.input-container--name {
+    grid-column: span 2;
+}
+
+.input-container--description {
+    grid-column: span 2;
+}
+
+textarea {
+    cursor: text;
+    resize: none;
+    color: #111827;
+    background: #f9fafb;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    outline: none;
+    margin-bottom: 10px;
+
 }
 
 .form-group--button {
@@ -79,24 +91,37 @@ body {
     gap: 1em;
     align-items: flex-end;
     flex-grow: 1;
+    grid-column: span 2;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
 }
 
 .form__input {
     padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background: none;
     outline:none;
     border: 1px solid #ccc;
-    color: #2c3e50;
+    color: #111827;
+    background: #f9fafb;
+    width: 100%;
+}
+
+.form__input:focus, textarea:focus {
+    box-shadow: 0 0 0 2px rgba(40, 108, 255, 0.863);
 }
 
 select.form__input, input[type="date"] {
     cursor: pointer;
 }
 
-span.form__input {
-    font-size: 15px;
+div.form__input {
     user-select: none;
 }
 
@@ -134,5 +159,3 @@ input:disabled, select:disabled {
 .form-button--decline:hover {
     background: #c0392b;
 }
-
-

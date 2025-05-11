@@ -13,7 +13,12 @@ function isActive($page) {
     --menu-color-secondary: #2c3e50;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .menu {
+    font-family: 'Roboto', sans-serif;
     border-radius: 10px 0px 0px 10px;
     display: flex;
     flex-direction: column;
@@ -67,10 +72,24 @@ function isActive($page) {
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin: 1em;
+    width: 100%;
+    padding: 1em;
     flex-grow: 1;
     overflow-y: auto;
     gap: 1em;
+}
+
+.menu__nav::-webkit-scrollbar {
+    width: 5px;
+}
+
+.menu__nav::-webkit-scrollbar-thumb {
+    background: #7f8c8d; 
+    border-radius: 5px;
+}
+
+.menu__nav::-webkit-scrollbar-track {
+    border-radius: 5px;
 }
 
 .menu__item {
@@ -81,7 +100,7 @@ function isActive($page) {
     display: flex;
     padding: .8em;
     justify-content: left;
-    width: 91%;
+    width: 95%;
     border-radius: 10px;
     user-select: none;
 }
@@ -103,7 +122,7 @@ function isActive($page) {
     justify-content: left;
     border-radius: 10px;
     user-select: none;
-    width: 91%;
+    width: 95%;
 }
 
 .menu__options-item:hover {
@@ -157,6 +176,37 @@ function isActive($page) {
             <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
+            <div id="menu-request" class="menu__item menu__item--selectable">
+                <div>
+                    <i class="fas fa-file-alt"></i>
+                    <span>Solicitudes</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu__item-iconDeploy"></i>
+            </div>
+            <div class="menu__options menu__item-request">
+                <?php if ($records['admin'] < 1):?>
+                    <a href="solicitud-bienes.php#menu-request" class="menu__options-item <?php echo isActive('solicitud-bienes.php')?>">
+                        <span>Solicitar Bien</span>
+                    </a>
+                    <a href="mis-solicitudes.php#menu-request" class="menu__options-item <?php echo isActive('mis-solicitudes.php');?>">
+                        <span>Mis Solicitudes</span>
+                    </a>
+                <?php endif; ?>
+                <a href="solicitud-desincorporacion.php#menu-request" class="menu__options-item <?php echo isActive('solicitud-desincorporacion.php');?>">
+                    <span>Desincorporar bien</span>
+                </a>
+                <?php if ($records['admin'] >= 1):?>
+                    <a href="lista-solicitudes.php#menu-request" class="menu__options-item <?php echo isActive('lista-solicitudes.php');?>">
+                        <span>Lista de Solicitudes</span>
+                    </a>
+                    <a href="solicitudes-pendientes.php#menu-request" class="menu__options-item <?php echo isActive('solicitudes-pendientes.php');?>">
+                        <span>Solicitudes Pendientes</span>
+                    </a>
+                    <a href="solicitudes-rechazadas.php#menu-request" class="menu__options-item <?php echo isActive('solicitudes-rechazadas.php');?>">
+                        <span>Solicitudes Rechazadas</span>
+                    </a>
+                <?php endif; ?>
+            </div>
             <div class="menu__item menu__item--selectable" id="menu-estate">
                 <div>
                     <i class="fas fa-box"></i>
@@ -172,7 +222,7 @@ function isActive($page) {
                     <span>Mis Bienes Desincorporados</span>
                 </a>
                 <?php if ($records['admin'] >= 1):?>
-                    <a href="agregar-bien.php#menu-estate" class="menu__options-item <?php echo isActive('agregar-bien.php');?>">
+                    <a href="agregar-bien.php#menu-estate" name="add-estates" class="menu__options-item <?php echo isActive('agregar-bien.php');?>">
                         <span>Agregar Bienes</span>
                     </a>
                     <a href="lista-bienes.php#menu-estate" class="menu__options-item <?php echo isActive('lista-bienes.php');?>">
@@ -180,35 +230,6 @@ function isActive($page) {
                     </a>
                     <a href="lista-bienes-desincorporados.php#menu-estate" class="menu__options-item <?php echo isActive('lista-bienes-desincorporados.php');?>">
                         <span>Lista de Bienes Desincorporados</span>
-                    </a>
-                <?php endif; ?>
-            </div>
-            <div id="menu-request" class="menu__item menu__item--selectable">
-                <div>
-                    <i class="fas fa-file-alt"></i>
-                    <span>Solicitudes</span>
-                </div>
-                <i class="fa-solid fa-chevron-right menu__item-iconDeploy"></i>
-            </div>
-            <div class="menu__options menu__item-request">
-                <a href="mis-solicitudes.php#menu-request" class="menu__options-item <?php echo isActive('mis-solicitudes.php');?>">
-                    <span>Mis Solicitudes</span>
-                </a>
-                <a href="solicitud-bienes.php#menu-request" class="menu__options-item <?php echo isActive('solicitud-bienes.php')?>">
-                    <span>Solicitar Bien</span>
-                </a>
-                <a href="solicitud-desincorporacion.php#menu-request" class="menu__options-item <?php echo isActive('solicitud-desincorporacion.php');?>">
-                    <span>Desincorporar bien</span>
-                </a>
-                <?php if ($records['admin'] >= 1):?>
-                    <a href="lista-solicitudes.php#menu-request" class="menu__options-item <?php echo isActive('lista-solicitudes.php');?>">
-                        <span>Lista de Solicitudes</span>
-                    </a>
-                    <a href="solicitudes-pendientes.php#menu-request" class="menu__options-item <?php echo isActive('solicitudes-pendientes.php');?>">
-                        <span>Solicitudes Pendientes</span>
-                    </a>
-                    <a href="solicitudes-rechazadas.php#menu-request" class="menu__options-item <?php echo isActive('solicitudes-rechazadas.php');?>">
-                        <span>Solicitudes Rechazadas</span>
                     </a>
                 <?php endif; ?>
             </div>
