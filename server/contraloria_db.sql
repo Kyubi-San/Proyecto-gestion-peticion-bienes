@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2025 a las 23:13:17
+-- Tiempo de generación: 24-04-2025 a las 00:47:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,8 @@ CREATE TABLE `bienes` (
 --
 
 INSERT INTO `bienes` (`id`, `name`, `type`, `description`, `withdrawalDate`, `approvalDate`, `requestDate`, `responsible`, `comments`) VALUES
-('68epPpDcAo', 'Pantalla', 'Electronico', 'LCD LG 24 pulgadas', '0000-00-00', '2025-03-11', '2025-03-11', 25, 'Urgente');
+('bNXfSOOwBs', 'Impresora', 'Electronico', 'Epson', '2025-04-20', '2025-04-20', '2025-04-20', 26, 'Urgente'),
+('xovgQhhZJV', 'Mouse', 'Electronico', 'Inalambrico', '0000-00-00', '2025-04-21', '2025-04-21', 26, 'pls');
 
 -- --------------------------------------------------------
 
@@ -57,16 +58,19 @@ CREATE TABLE `notificaciones` (
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
   `type` int(11) NOT NULL,
-  `message` varchar(100) NOT NULL
+  `message` varchar(100) NOT NULL,
+  `id_solicitud` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `notificaciones`
 --
 
-INSERT INTO `notificaciones` (`id`, `sender`, `receiver`, `type`, `message`) VALUES
-(9, 24, 24, 1, 'Solicito un nuevo bien'),
-(10, 25, 25, 1, 'Solicito un nuevo bien');
+INSERT INTO `notificaciones` (`id`, `sender`, `receiver`, `type`, `message`, `id_solicitud`) VALUES
+(26, 25, 26, 2, 'Aprobo tu solicitud de Impresora', 0),
+(28, 25, 26, 2, 'Aprobo tu solicitud de Mouse', 0),
+(29, 26, 25, 1, 'Solicito un nuevo bien', 104),
+(32, 25, 26, 2, 'Rechazo tu solicitud de Computadora Laptop', 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +120,10 @@ CREATE TABLE `solicitudes` (
 --
 
 INSERT INTO `solicitudes` (`n_solicitud`, `bien`, `descripcion`, `comentario`, `comentario_admin`, `tipo_bien`, `fecha_solicitud`, `id_usuario`, `aprobado`) VALUES
-(88, 'Pantalla', 'LCD LG 24 pulgadas', 'Urgente', '', 'Electronico', '2025-03-11', 25, 1);
+(102, 'Impresora', 'Epson', 'Urgente', '', 'Electronico', '2025-04-20', 26, 1),
+(103, 'Mouse', 'Inalambrico', 'pls', '', 'Electronico', '2025-04-21', 26, 1),
+(104, 'Silla', 'De oficina', 'Lo mas pronto posible', '', 'Mueble', '2025-04-21', 26, 0),
+(106, 'Computadora Laptop', 'Min 8GB ram, 500GB Disco duro', 'necesario', 'No disponible actualmente', 'Electronico', '2025-04-21', 26, -1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +134,7 @@ INSERT INTO `solicitudes` (`n_solicitud`, `bien`, `descripcion`, `comentario`, `
 CREATE TABLE `usuario` (
   `n_dependencia` int(11) NOT NULL,
   `nombre_dependencia` varchar(100) NOT NULL,
-  `contrasena` varchar(1000) NOT NULL,
+  `contrasena` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
@@ -141,8 +148,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`n_dependencia`, `nombre_dependencia`, `contrasena`, `username`, `nombre`, `apellido`, `correo`, `cedula`, `admin`) VALUES
-(25, 'Informatica', '$2y$10$OsDzTQkmSA9Wfh/JfApoM.9YyXN1wgMkcZypFouS4e1IQRojygWVm', 'Xander', 'Javier', 'Garcia', 'atam2005gm@gmail.com', 31533126, 1),
-(26, 'Contaduria', '$2y$10$eIQtdaRmRl0fXgySgB/YLOn3ef3Xg8JVNqUzcugnmNglOQlHEXiu6', 'User', 'Javier', 'Garcia', 'javieragm27@outlook.es', 31533126, 0);
+(25, 'Informatica', '$2y$10$OsDzTQkmSA9Wfh/JfApoM.9YyXN1wgMkcZypFouS4e1IQRojygWVm', 'Alexander', 'Javier', 'Garcia', 'atam2005gm@gmail.com', 31533126, 1),
+(26, 'Contaduria', '$2y$10$vrYzkSUgtuwJWI7W..NkHuttLj460FgUJyI7CppnYO/w9IxY5Ige2', 'Javier2005', 'Javier', 'Garcia', 'javieragm27@outlook.es', 31533126, 0);
 
 --
 -- Índices para tablas volcadas
@@ -186,7 +193,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_seguridad`
@@ -198,7 +205,7 @@ ALTER TABLE `pregunta_seguridad`
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `n_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `n_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
